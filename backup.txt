@@ -1,0 +1,141 @@
+										aWords = aWords.replace(/(.*\">)/,"$1")+aWords.replace(/.*\">(.*)<\/.*/g,"$1").slice(0,42)+"<span class='hd'>"+aWords.slice(42)+"</span></a>"
+
+for %f in (*.html) do type "%f" >> combined.html
+
+
+
+var a = document.querySelectorAll("#myDiv");
+var top;
+for(i=0;i<a.length;i++){
+if(i == 0){
+	a[i+2].style.top = 290
+}else{
+  if(i % 2){
+    a[i].style.left = 526
+    a[i].style.top = a[i-1].style.top
+	a[i+1].style.top = parseInt(a[i-1].style.top)+290
+  }
+}
+}
+
+
+(function() {
+		var script = document.createElement("SCRIPT");
+	  script.src = 'file:///C:/html2canvas.min.js';
+		script.type = 'text/javascript';
+		script.onload = function() {
+		};
+		document.getElementsByTagName("head")[0].appendChild(script);
+})(); 
+
+
+String.prototype.replaceAll = function(search, replacement) {
+    var target = this;
+    return target.replace(new RegExp(search, 'g'), replacement);
+};
+var a = document.getElementsByClassName("qsid")[0].textContent.replaceAll("\r","").replaceAll("\n","").trim() +":> "
+document.getElementsByClassName("lngqs")[0].textContent = a+" "+document.getElementsByClassName("lngqs")[0].textContent.replaceAll("\r","").replaceAll("\n","").trim()
+document.getElementsByClassName("lngqs")[1].textContent = document.getElementsByClassName("lngqs")[1].textContent.replaceAll("\r","").replaceAll("\n","").trim()
+
+		switch (true) {
+			case inp.includes("و"):
+				inp = inp + "|" + inp.replaceAll("و", "ؤ")
+				break;
+			case inp.includes("ؤ"):
+				inp = inp + "|" + inp.replaceAll("ؤ", "و")
+				break;
+			case inp.includes("ا"):
+				inp = inp + "|" + inp.replaceAll("ا", ".")
+				break;
+			case inp.includes("آ"):
+				inp = inp + "|" + inp.replaceAll("آ", ".")
+				break;
+			case inp.includes("ء"):
+				inp = inp + "|" + inp.replaceAll("ء", "")
+				break;
+			case inp.includes("إ"):
+				inp = inp + "|" + inp.replaceAll("إ", ".")
+				break;
+			case inp.includes("أ"):
+				inp = inp + "|" + inp.replaceAll("أ", ".")
+				break;
+			case inp.includes("ی"):
+				inp = inp + "|" + inp.replaceAll("ی", ".")
+				break;
+		}
+		
+		
+		"allah ho akbar".match(/(?=.*how)(?=.*how).+/)
+
+
+var strs = "";
+function* permute(permutation) {
+  var length = permutation.length,
+      c = Array(length).fill(0),
+      i = 1;
+
+  yield permutation;
+  while (i < length) {
+    if (c[i] < i) {
+      var k = i % 2 && c[i];
+      [permutation[i], permutation[k]] = [permutation[k], permutation[i]];
+      ++c[i];
+      i = 1;
+      yield permutation;
+    } else {
+      c[i++] = 0;
+    }
+  }
+}
+
+// sample input:
+var s = 'امام سلام مقتدی';
+for (var words of permute(s.split(/\s+/))) {
+    strs += "&"+words.join(' ');
+}
+strs = strs.replace("&","")
+
+(امام سلام مقتدی)&(سلام امام مقتدی)&(مقتدی امام سلام)&(امام مقتدی سلام)&(سلام مقتدی امام)&(مقتدی سلام امام)
+
+
+let string1 = "this is the string";
+let string2 = "string is the this";
+
+function findMatch( string1, string2 ) {
+	//split by any non-word character, anything that is not
+        //a-z, A-Z, 0-9 ( including the _ character )
+	let splitPattern = /\W/;
+	let split1 = string1.split( splitPattern );
+        let split2 = string2.split( splitPattern );
+	
+    //traverse string1 array 
+	for ( let i = 0; i < split1.length; i++ ) {
+           let checkForMatch = false;
+          //traverse string2 array
+  	  for( let j = 0; j < split2.length; j++ ) {
+    	    if ( split1[ i ] === split2[ j ] ) {
+              checkForMatch = true;
+              break;
+            }
+          }//inner for
+    
+    //if match not found in one itteration, strings do not
+    //match and false should be returned
+    if ( !checkForMatch ) {
+    	return false;
+    }
+  }//outer for
+  
+  //else it matches so return true
+   return true;
+ 
+}//end findMatch
+
+console.log( findMatch( string1, string2 ) );
+
+
+String.prototype.replaceLast = function (what, replacement) {
+    return this.split(' ').reverse().join(' ').replace(new RegExp(what), replacement).split(' ').reverse().join(' ');
+};
+
+"(?=.*امام)(?=.*سلام)(?=.*مقتدی)کب".replaceLast("\)","a")

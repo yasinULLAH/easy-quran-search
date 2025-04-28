@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="jquery.min.js"></script>
+<script src="pdfobject.js"></script>
+<style>
+body{
+	padding:0px !important;
+	margin:0px !important;
+}
+</style>
+</head>
+<body>
+<div id="example1"></div>
+</body>
+<script>
+var loc = "Noting to Display";
+if(location.href.includes("?file=")){
+	loc = location.href.split("?file=")[1]
+}
+PDFObject.embed(loc, "#example1");
+</script>
+</html>

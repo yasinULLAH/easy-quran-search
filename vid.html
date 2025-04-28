@@ -1,0 +1,44 @@
+<style>
+video {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.rapper {
+    text-align: center;
+}
+
+button {
+    width: 95%;
+    height: 50px;
+    position: relative;
+}
+</style>
+<script src="jquery.min.js"></script>
+<meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+<body>
+</body>
+<script>
+function getUrlVars() {
+    var vars = {};
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        vars[key] = value;
+    });
+    return vars;
+}
+var youtube= getUrlVars()["ytube"];
+var mytext = getUrlVars()["video"];
+mytext = decodeURI(mytext).replace(/\s{0,4}\?/,"?").replace(/(.*)\?.*/,"$1")
+mytext = mytext+".mp4"
+console.log(decodeURI(mytext))
+mytext = "file://D:/Short Clips Aap Kay Masail Live Transmission/"+decodeURI(mytext)
+console.log(mytext)
+thedata = '<video controls autoplay width="95%"><source src="'+mytext+'" type="video/mp4"></video>';
+document.getElementsByTagName("body")[0].innerHTML = thedata
+document.getElementsByTagName("body")[0].innerHTML += "<div class='rapper'><button onclick=\"document.getElementsByTagName('video')[0].playbackRate=1.8\">Speed</button></div>"
+setTimeout(function(){
+	if(document.getElementsByTagName("video")[0].readyState!=4){
+		location.href = youtube;
+	}
+},2800)
+</script>

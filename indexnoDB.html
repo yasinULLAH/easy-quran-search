@@ -1,0 +1,815 @@
+<html manifest="maktab.appcache">
+<head>
+    <title>Maktabatullah Search engine for maktaba jibreel with Regular expression (Regex) مکتبہ جبریل سرچ</title>
+    <script src="jquery.min.js"></script>
+    <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <style>
+.hidden{
+	display:none;
+}
+#txt,#txtR{
+	font-size:120%;
+}
+#txt{
+    width: 50%;
+    height: 48px;
+    margin-left: 9px;
+}
+.theQ {
+    background: #b7b6b6;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    border-bottom-left-radius: 24px;
+    border-bottom-right-radius: 24px;
+    margin-top: -1px;
+    border-bottom: 1px solid red;
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+}
+p {
+    margin-top: -10px !important;
+    padding-right: 15px;
+    padding-left: 17px;
+    border-radius: 14px;
+    word-spacing: 2px;
+    font-size: 19px !important;
+    font-family: jameel noori nastaleeq;
+    border: 1px solid #ff0606;
+	 background: #f0ececb3;
+	 <--! box-shadow: 0px -5px 9px; -->
+}
+
+#div {
+	margin-top: 28px;
+	direction: rtl;
+	margin-right: 8px;
+}
+#div a {
+    text-decoration: none !important;
+}
+#searchT {
+	direction: rtl;
+		word-break:keep-all;
+}
+
+* {
+	transition: all .5s;
+}
+
+input {
+	background: rgba(0, 200, 0, 0.5) none repeat scroll 0 0;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) inset, 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+Label, legend {
+	display: block;
+	margin-left: 3px;
+	padding-top: 2px;
+	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: .9em;
+}
+#cnt {
+    position: absolute;
+    width: 96%;
+    left: 1%;
+}
+.st {
+	background: yellow;
+	text-decoration: none !important;
+}
+
+.inline, legend {
+	display: inline-block;
+	padding: 0px !important;
+	margin: 0px;
+}
+
+fieldset {
+	direction: rtl !important;
+	padding: 0px !important;
+}
+
+legend {
+	border-bottom: 5px solid #009;
+	tex-align: center;
+	width: 99.5%;
+	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1.4em;
+	border-top: 2px solid #009;
+	border-left: 2px solid #009;
+	border-right: 2px solid #009;
+	border-radius: 10px;
+	-webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+	box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+	padding: 3px;
+
+}
+
+fieldset {
+    font-family: Jameel Noori Nastaleeq;
+    border: 2px solid #009;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    margin-bottom: 12px;
+    margin-top: 9px;
+}
+
+::placeholder {
+	color: red;
+	opacity: 1 !important;
+	font-size: 120% !important;
+}
+
+#hrf {
+	color: blue;
+	cursor: pointer;
+	padding-left:6px;
+	font-weight:bold;
+	border-bottom: 1px dotted #605252;
+}
+
+.chkbb {
+    border: 1px solid #605555 !important;
+    padding-left: 14 !important;
+    cursor: pointer !important;
+    background: rgba(9, 3, 4, .1);
+    box-shadow: 5px 2px 8px;
+    padding-right: 14px;
+    border-radius: 20px;
+    margin-left: -10;
+    background: #e6dddd;
+}
+
+#shC {
+    cursor: pointer;
+    font-size: 13;
+    font: bold !important;
+    border-radius: 16px;
+    background: #09ef09;
+    top: -3px;
+    position: relative;
+}
+
+@media screen and (max-width: 1100px) {
+    #txtR	{
+        display:none !important;
+    }
+	#txt{
+		width:98% !important;
+		height:7% important;
+		font-size:160% !important;
+		margin-left:0px !important;
+	}
+	fieldset{
+		display:none !important;
+	}
+	#searchT{
+		display:none !important;
+	}
+	h3{
+		display:none !important;
+	}
+	::placeholder {
+			color: red;
+			opacity: 1 !important;
+			font-size: 136%;
+		}
+}
+#div > p{
+	tex-align:right;
+}
+
+#hrf::before {
+    content: "{ ";
+}
+#hrf::after {
+
+    content: " }";
+
+}
+.theOther {
+    font-size: 110%;
+}
+/* Hide Long Text
+#div a:hover {
+    overflow: visible;
+    white-space: nowrap;
+}
+#div a {
+    width: 250px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+*/
+ </style>
+</head>
+
+<body onload="searchTT();firstME();">
+<h1 style="display:none">Allaahh Ho Akbar اللہ اکبر </h1>
+<div style="text-align:center;display:none" id="searchT">
+</div>
+<div id="demo">
+
+    <fieldset>
+        <legend dir="ltr">&nbsp; Options <span style="text-align: center" id="cnt">Maktabatullah a maktaba Jibreel search Engine</span></legend>
+        <h3 style="text-align:center">
+            <span class='chkbb'><input type="checkbox" style="display:none" id="dpsrch" onclick="rns2()" checked="checked">مترادف الفاظ </input></span>
+            <span class='chkbb'><input type="checkbox" style="display:none" id="engsrch" onclick="clr();">انگریزی سرچ </input></span>
+            <span class='chkbb'><input type="checkbox" style="display:none" id="ch" checked onclick="rns2()">اعراب کو نظر </input></span>
+            <span class='chkbb' style="display:none"><input type="checkbox" style="display:none" id="od" onclick="rns2()">ترتیب نظرانداز </input></span>
+            <span class='chkbb' style='padding-left: 14px !important;'><button id="shC" value="سرچ رزلٹ ختم" style="display:none;" onclick="localStorage.removeItem('searchT')"><b>سرچ رزلٹ ختم </b></button><b>سرچ رزلٹ ختم </b></span>
+        </h3>
+    </fieldset>
+	<div id="theInputs" style="margin-left: 9;">
+    <input type="text" id="txtR" onclick="checka()" dir="auto" placeholder=" Filter the Search تلاش کو فلٹر کریں" style="width: 48%; height: 48px;opacity:0.4" disabled="disabled" oninput="rns3()"/>
+    <input type="text" id="txt" contextmenu="mymenu" dir="auto" autofocus placeholder=" Start Searching Here تلاش یہاں سے شروع کریں" onchange="rns2();searchTT();"/>
+	<menu type="context" id="mymenu" class="searchTTE">
+  </menu>
+</menu>
+	</div>
+	<input type="hidden" id="txtH" onchange="rns2()"/>
+<h3 style="text-align:center;display:none;">Type Then <button onclick="rns()" style="width:12%;height:44px;font-size:30px;background: green;">بسم اللہ</button>You can search in <a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp" target="_blank">regular expression</a> Like نماز فضیلت&amp;نماز فضائل&amp;نماز فائد</h3>
+
+   <div id="div"></div>
+</div>
+</body>
+</html>
+<script>
+var Words;
+var stringData;
+$.ajax({
+    xhr: function () {
+        var xhr = new window.XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+        }, false);
+        xhr.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var percentComplete = evt.loaded / evt.total;
+                document.getElementById("cnt").textContent = Math.round(percentComplete*100)+"% Completed انتظار فرمایئے یہ لوڈنگ صرف پہلی بار ہوگا";
+            }
+        }, false);
+        return xhr;
+    },
+    url: "data.AM",
+    complete: function (data) {
+		document.getElementById("cnt").textContent = "Maktabatullah a maktaba Jibreel search Engine";stringData = data.responseText;
+		stringData = stringData.replace(/للَّه/g,"للہ");
+		stringData = stringData.replace(/الله/g,"اللہ");
+		stringData = stringData.replace(/لِلَّه/g,"اللہ");
+		if(stringData.includes("--1--")){
+			Words = stringData.split("--1--")
+		}else{
+			Words = stringData.split("\n")
+		}
+	}
+});
+window.onscroll = function(){
+	if(window.scrollMaxY==window.scrollY){
+	if(document.getElementById("more")!=null){
+		document.getElementById("more").click()
+		}
+	}
+}
+ function excs(data){
+		var txtToR = "|"+data.textContent;
+		var lclst = localStorage.searchT;
+		var nData = lclst.replace(txtToR,"");
+		localStorage.searchT = nData;
+		//var tt = "";
+		var tt2 = "";
+        var dd = localStorage.getItem("searchT");
+        dd = dd.split("|")
+        for (i = 0; i < dd.length; i++) {
+            //tt += "<span id='hrf' oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</span>&nbsp;"
+			tt2 += "<menuitem oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</menuitem>"
+        }
+		console.log(tt2)
+		$(".searchTTE")[0].innerHTML = tt2;
+        //$("#searchT")[0].innerHTML = tt;
+		
+ }
+ function theFunc(){
+	if($("#div span[class='hidden']")[0] == undefined){
+		document.getElementById("more").style.display = "none";
+	}else{
+		$("#div span[class='hidden']")[0].setAttribute("class","show")
+		}
+ }
+    function clmm() {
+		if ($("#ch:checked").length > 0) {
+		inp = inp.replace(/ؤ|و/g, "(و|ؤ)")
+		inp = inp.replace(/ك|ک/g, "(ك|ک)")
+		inp = inp.replace(/آ|ا|أ|إ/g, "(آ|ا|أ|إ)")
+		inp = inp.replaceAll("ء", "")
+		inp = inp.replace(/ى|ی|ي/g, "(ى|ی|ي)")
+		inp = inp.replace(/ہ|ھ|ة|ۃ/g, "(ہ|ھ|ة|ۃ)")
+		inp = inp.replace(/ے/g, "(ے|ی)")
+		inp = inp.replace(/[ًٌٍََُِِّْٓ]/g, "")
+		}
+		var theData = "";
+		inp = inp.replaceAll("%", "|")
+		inp = inp.replaceAll("@", "[")
+		inp = inp.replaceAll("#", "]")
+		inp = inp.replaceAll("!", ",")
+		if(inp.includes("&")){
+				inpv = inp.split("&")
+				for(j=0;j<inpv.length;j++){
+				inp = inpv[j].split(".*");
+				var mMatch = "";
+				for (i = 0; i < Words.length; i++) {
+				aWords = Words[i];
+				for(e=0;e<inp.length;e++){
+				theRag = new RegExp(inp[e]);
+					if(theRag.test(Words[i].replace(/.*\">(.*)<\/.*/g,"$1").replace(/[ًٌٍََُِِّْٓۡٔ]/g, ""))){
+							mMatch = "true";
+							if(/^<a/.test(Words[i])){
+								mWords = aWords.replace(/.*\">(.*)<\/.*/g,"$1").replace(Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0], "<font class='st'>" + Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0] + "</font>")
+								aWords = aWords.replace(/(.*\">)(.*)(<\/.*)/g,"$1"+mWords+"$3")
+							}else{
+								mWords = aWords.replace(Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0], "<font class='st'>" + Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0] + "</font>")
+								aWords = mWords
+							}
+					}else{
+						mMatch = "false";
+						break;
+					}
+				}
+				if(mMatch=="true"){
+							if(aWords.includes("&des")){
+										aWords = "<span class='theQ'>"+aWords.replace(/&des/,"</span><br>");
+								}else if(aWords.includes("--2--")){
+										aWords = "<span class='theQ'>"+aWords.replace("--2--","</span><br>");
+								}
+							cnt += 1;
+							$("#cnt")[0].innerHTML = "Total Result: " + cnt
+							//Here 2
+							if(cnt%203==0){
+									theData += "[txtToSpan]<p dir='auto'>"+aWords+"</p>";
+							}else{
+									theData += "<p dir='auto'>"+aWords+"</p>";
+							}
+					}
+				}
+			}
+		}else{
+				inp = inp.split(".*");
+				var mMatch = "";
+				for (i = 0; i < Words.length; i++) {
+				aWords = Words[i];
+				for(e=0;e<inp.length;e++){
+				var theRag = new RegExp(inp[e]);
+					if(theRag.test(Words[i].replace(/.*\">(.*)<\/.*/g,"$1").replace(/[ًٌٍََُِِّْٓۡٔ]/g, ""))){
+							mMatch = "true";
+							if(/^<a/.test(Words[i])){
+								mWords = aWords.replace(/.*\">(.*)<\/.*/g,"$1").replace(Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0], "<font class='st'>" + Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0] + "</font>")
+								aWords = aWords.replace(/(.*\">)(.*)(<\/.*)/g,"$1"+mWords+"$3")
+							}else{
+								mWords = aWords.replace(Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0], "<font class='st'>" + Words[i].replace(/[ًٌٍََُِِّْٓۡٔ]/g, "").match(theRag,"i")[0] + "</font>")
+								aWords = mWords
+							}
+					}else{
+						mMatch = "false";
+						break;
+					}
+				}
+				if(mMatch=="true"){
+							if(aWords.includes("&des")){
+										aWords = "<span class='theQ'>"+aWords.replace(/&des/,"</span><br>");
+								}else if(aWords.includes("--2--")){
+										aWords = "<span class='theQ'>"+aWords.replace("--2--","</span><br>");
+								}
+							cnt += 1;
+							$("#cnt")[0].innerHTML = "Total Result: " + cnt
+							//Here 2
+							if(cnt%203==0){
+									theData += "[txtToSpan]<p dir='auto'>"+aWords+"</p>";
+							}else{
+									theData += "<p dir='auto'>"+aWords+"</p>";
+							}
+					}
+		}
+}
+		if(cnt<=0){
+			document.getElementById("cnt").textContent = "Total Result: 0";
+		}else{
+			theData = theData.replace("[txtToSpan]","<span class='hidden'>").replace(/\[txtToSpan\]/g,"</span><span class='hidden'>");
+			$("#div").append(theData)
+			if(cnt<203){
+			}else{
+			document.getElementById("div").innerHTML += '<div id="more" onclick="theFunc()" style="text-align: center;cursor: pointer;color: blue;text-decoration: underline;font-size: 21px;">Load More</div>';
+			}
+		}
+		 $("a").click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+			if(location.href.match(/jtr/i)!=null){
+				popup("vid.html?video="+$(this)[0].textContent+"&ytube="+url)
+				}else{
+					popup(url)
+				}
+        });
+
+
+        if ($("#cnt")[0].textContent == "Total Result: 0" || $("#cnt")[0].textContent == "") {
+            $("#txtR").prop("disabled", true);
+            $("#txtR").css("opacity", ".4");
+        } else {
+            $("#txtR").prop("disabled", false);
+            $("#txtR").css("opacity", "1");
+        }
+    }
+
+    function checka() {
+        if ($("#cnt")[0].innerHTML != "") {
+            var aa = parseInt($("#cnt")[0].innerHTML.substr(14));
+            if (aa >= 800) {
+                var pp = prompt("Too Much Result Enter Here:");
+                $("#txtR")[0].value = pp;
+                rns3()
+            }
+        }
+    }
+
+    function searchTT() {
+	   console.log("اللہ اکبر کبیرا");
+        var ee = $("#txt")[0].value;
+        if (localStorage.getItem("searchT")) {
+            var aa = localStorage.getItem("searchT");
+            if (ee != "" && ee.match(/\s/g).length<4) {
+                if (localStorage.getItem("searchT").includes(ee)) {
+
+                } else {
+                    var gg = aa + "|" + ee;
+                    localStorage.setItem("searchT", gg);
+                }
+            } else {
+
+            }
+        } else {
+            var ff = "اللہ اکبر|محمد رسول اللہ|نماز کس/کیس/طریق&جمع فر۔ض/وق'ت/شر،ط/و'ج'ب"
+            localStorage.setItem("searchT", ff);
+        }
+        //var tt = "";
+		var tt2 = "";
+        var dd = localStorage.getItem("searchT");
+        dd = dd.split("|")
+        for (i = 0; i < dd.length; i++) {
+            //tt += "<span id='hrf' oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</span>&nbsp;"
+			tt2 += "<menuitem oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</menuitem>"
+        }
+		$(".searchTTE")[0].innerHTML = tt2;
+        //$("#searchT")[0].innerHTML = tt;
+    }
+
+    function loadScript(url, callback) {
+
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+
+        if (script.readyState) { //IE
+            script.onreadystatechange = function () {
+                if (script.readyState == "loaded" ||
+                    script.readyState == "complete") {
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else { //Others
+            script.onload = function () {
+                callback();
+            };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+
+    function rns3() {
+		$("#div span[class='hidden']").attr("class","show")
+		if(document.getElementById("more")!=null){
+			document.getElementById("more").style.display = "none";
+		}
+        $("br").remove()
+        inp = $("#txtR").val()
+        if (inp == "") {
+            $("p").css("display", "block")
+        }
+        str1 = "";
+        str2 = "";
+		if(inp.match(/(\S+)ٓ/)!=null){
+			inp = inp.replaceAll("ٓ","");
+			inp = inp.split("").join().replace(/,/g,"'");
+		}
+        inp = inp.replace(/(\d)(\۔)(\d*)/, ".{$1,$3}")
+        inp = inp.replaceAll("۔", ".{0,}")
+        inp = inp.replaceAll("،", ".+")
+        inp = inp.replaceAll("'", ".?")
+        inp = inp.replaceAll("؎", ".")
+        inp = inp.replace(/(\S+)؛/g, "($1){0,1}")
+		inp = inp.replaceAll("؟", ".{0,2}")
+        if (inp.includes("&")) {
+            inp = inp.replaceAll("&", "||")
+        }
+        if (inp.includes(" ")) {
+            if (inp.includes("||")) {
+                spl = inp.split("||")
+                for (i = 0; i < spl.length; i++) {
+                    str1 = spl[i].split(/\s/).reverse().join(" ");
+                    inp = inp + "|" + str1
+                }
+
+            } else {
+                inp = inp + "|" + inp.split(/\s/).reverse().join(" ");
+            }
+        }
+		
+		inp = inp.replace(/ؤ|و/g, "(و|ؤ)")
+		inp = inp.replace(/ك|ک/g, "(ك|ک)")
+		inp = inp.replace(/آ|ا|أ|إ/g, "(آ|ا|أ|إ)")
+		inp = inp.replaceAll("ء", "")
+		inp = inp.replace(/ى|ی|ي/g, "(ى|ی|ي)")
+		inp = inp.replace(/ه|ھ/g, "(ه|ھ)")
+		inp = inp.replace(/ة|ۃ/g, "(ة|ۃ)")
+        inp = inp.replace(/[ًٌٍََُِِّْٓۡٔ]/g, "")
+        inp = inp.replace(" ", ".*")
+        var reg = new RegExp(inp, "i");
+        $('p').each(function (i) {
+            if (reg.test($(this).text().replace(/[ًٌٍََُِِّْٓۡٔ]/g, ""))) {
+                $(this).css("display", "block")
+            } else {
+                $(this).css("display", "none");
+            }
+        });
+        var cnt = $("p[style*='display: block;']").length
+        $("#cnt")[0].innerHTML = "Total Result: " + cnt
+
+    }
+
+
+    function rns2() {
+        function isMatch(searchOnString, searchText) {
+            searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
+        }
+		function datam(){
+		if(inp.match(/(\S+)ٓ/)!=null){
+			if(inp.match(/ٓ/g).length>1){
+				inp = inp.split("").join("'").replaceAll("ٓ","")
+			}else{
+			if(inp.includes("&")){
+				inp = inp.replace("&"," & ")
+			}
+			var b = inp.match(/(\S+)ٓ/)[0];
+			var c = inp.match(/(\S+)ٓ/)[1].split("").join("'");
+			inp = inp.replace(b,c);
+			inp = inp.replace(" & ","&")
+			}
+		}
+		inp = inp.replace(/(\d)(\۔)(\d*)/, ".{$1!$3}")
+		inp = inp.replaceAll("۔", ".{0!}")
+		inp = inp.replace(/(.):(.)/g, "@$1$2#")
+		inp = inp.replaceAll("،", ".+")
+		inp = inp.replaceAll("'", ".?")
+		inp = inp.replaceAll("ْ", ".")
+		inp = inp.replaceAll("؎", ".")
+		inp = inp.replace(/(\S+)؛/g, "($1){0!1}")
+		inp = inp.replaceAll("؟", ".{0!2}")
+		if($("#engsrch:checked").length == 0){
+			inp = inp.replace(/[a-zA-Z]+/g, "")
+		}
+		inp = inp.replaceAll("  ", " ")
+		inp = inp.trim();
+		$("#txtH").val(inp);
+		}
+
+        $("#txt")[0].value = $("#txt").val().replaceAll("&amp;", "&")
+        inp = $("#txt").val()
+
+        if ($("#engsrch:checked").length == 0) {
+            dt = "";
+            inp2 = $("#txtH").val(inp);
+            dt = inp
+            loadScript("eng_ur_db.js", function () {
+                aa = a.split("|");
+                for (i = 0; i < aa.length; i++) {
+                    aaa = aa[i].split("-")
+					var gla = new RegExp(aaa[0].replaceAll("/","\|"),'i')
+					if(dt.match(gla)!=null){
+							var mking = "\\b"+aaa[0].replaceAll("/","\|")+"\\b";
+							var ala = new RegExp(mking,'i')
+                            dt = dt.replace(ala,aaa[1])
+                    }
+                }
+				inp = inp.replace(inp, dt)
+                datam()
+                rns();
+            });
+        } else {
+			datam()
+			rns();
+        };
+        var aas = document.getElementsByClassName("chkbb");
+        for (i = 0; i < aas.length; i++) {
+            if (aas[i].children[0].checked) {
+                aas[i].style.background = "#0de90d"
+            } else {
+                aas[i].style.background = "#e6dddd"
+            }
+        }
+    };
+
+
+    function popup(url) {
+        var width = screen.width / 1.2;
+        var height = screen.width / 1.5;
+        var left = (screen.width - width) / 2;
+        var top = (screen.height - height) / 2;
+        var params = 'width=' + width + ', height=' + height;
+        params += ', top=' + top + ', left=' + left;
+        params += ', directories=no';
+        params += ', location=no';
+        params += ', menubar=no';
+        params += ', resizable=no';
+        params += ', scrollbars=yes';
+        params += ', status=no';
+        params += ', toolbar=no';
+        newwin = window.open(url, 'Allaahh ho akbar', params);
+        if (window.focus) {
+            newwin.focus()
+        }
+        return false;
+    }
+
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+
+    String.prototype.replaceIt = function (theString) {
+        var aa = this;
+        var theString = theString;
+        theString = theString.replaceAll("-", "|")
+		theString = theString.replaceAll(" ", ".{0!}")
+		theString = theString.replaceAll("\"", ".{0!}")
+		theString = theString.replaceAll("ـ", ".{0!}")
+        return aa.replaceAll(theString, "(" + theString + ")")
+    };
+
+    function isMatch(searchOnString, searchText) {
+        searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
+    }
+	
+if (!String.prototype.replaceLast) {
+    String.prototype.replaceLast = function(find, replace) {
+        var index = this.lastIndexOf(find);
+        if (index >= 0) {
+            return this.substring(0, index) + replace + this.substring(index + find.length);
+        }
+        return this.toString();
+    }
+}
+    function clr() {
+        $("#dpsrch").prop("checked", false);
+        rns2();
+    }
+
+    function rns() {
+        if ($("#dpsrch:checked").length > 0) {
+            $("#engsrch").prop("checked", false);
+        }
+        if ($("#engsrch:checked").length > 0) {
+            $("#dpsrch").prop("checked", false);
+        }
+
+        inp = $("#txtH").val()
+		//inpC = inp;
+		if(inp.match(/\s/g)!=null&&inp.match(/&/g)==null&&$("#od:checked").length>0){
+		if(inp.match(/\s/g).length>=2){
+					function *permute(a, n = a.length) {
+				  if (n <= 1) yield a.slice();
+				  else for (let i = 0; i < n; i++) {
+					yield *permute(a, n - 1);
+					const j = n % 2 ? 0 : i;
+					[a[n-1], a[j]] = [a[j], a[n-1]];
+				  }
+				}
+				inp = Array.from(permute(inp.split(' '))).map(perm => perm.join(' ')).toString().replace(/,/g,"%").trim();
+				//console.log("Test: "+inp)
+			}else if(inp.match(/\s/g).length>150){
+					var a = inp.replace(/(\S+)\s/g,"(?=.*$1)")
+						a = a.replaceLast(")",") ")
+						inp = a;
+						//console.log(a)
+				}
+		}
+        if (inp.includes("&")) {
+            var dta = inp.split("&")
+            var dta2 = "";
+            for (i = 0; i < dta.length; i++) {
+                if (dta[i].includes("/")) {
+                    dta2 += dta[i].replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
+                } else {
+                    dta2 += dta[i] + "]]";
+                }
+            }
+            dta2 = dta2.replace("]]","]] ").split(' ').reverse().join(' ').replace(/]]/, '').split(' ').reverse().join(' ').replace("]] ","]]").replaceAll("]]", "&");
+            inp = dta2.replaceAll("/", "|")
+			
+        } else {
+            var dta = inp
+            var dta2 = "";
+            dta2 += dta.replaceAll("%"," % ").replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
+            dta2 = dta2.split(' ').reverse().join(' ').replace(/]]/, '').split(' ').reverse().join(' ');
+            dta2 = dta2.replaceAll("]]", "&").replaceAll(" % ","%")
+            inp = dta2.replaceAll("/", "|")
+        }
+		inp = inp.replaceAll("\"", ".{0,}")
+        if (inp == "") {
+            $("#div").html("");
+            $("#cnt")[0].innerHTML = "Total Result: " + 0
+        } else {
+            $("#div").html("");
+            str1 = "";
+            str2 = "";
+
+			if(inp.match(/\s/g)==null){
+			
+			}else{
+				if (($("#od:checked").length > 0 && inp.match(/\s/g).length<2)||inp.match(/\|\|/g)!=null) {
+					if (inp.includes(" ")) {
+						if (inp.includes("||")) {
+							spl = inp.split("||")
+							for (i = 0; i < spl.length; i++) {
+								str1 = spl[i].split(/\s/).reverse().join(" ");
+								inp = inp + "|" + str1
+							}
+
+						} else {
+							inp = inp + "|" + inp.split(/\s/).reverse().join(" ");
+						}
+					}
+				}
+			}
+            cnt = 0;
+			inp = inp.replace(/\|\|/g, "|")
+            inp = inp.replaceAll(" ", ".*")
+            console.log("اللہ اکبر کبیرا")
+            if ($("#dpsrch:checked").length != 0) {
+                loadScript("fatawa.js", function () {
+                    inp = inp.trim();
+                    //console.log(inp)
+                    clmm()
+                });
+            }
+            if ($("#engsrch:checked").length == 0 && $("#dpsrch:checked").length == 0) {
+                //console.log(inp)
+                clmm()
+            }
+
+            if ($("#engsrch:checked").length != 0) {
+                loadScript("fatawa_eng.js", function () {
+                    inp = inp.trim();
+                   // console.log(inp)
+                    clmm()
+                });
+            }
+        }
+
+    }
+
+    function firstME() {
+		if(window.navigator.userAgent.match(/firefox/i)==null){
+			document.getElementById("mymenu").style.display="none";
+		}
+		if(location.href.includes("Quran")||location.href.includes("quran")){
+			document.getElementsByTagName("style")[0].innerHTML += "p{font-family:arial !important;padding:12px !important;word-spacing:0px !important;}"
+		}
+        document.getElementsByClassName("chkbb")[0].onclick = function () {
+            document.getElementsByClassName("chkbb")[0].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[1].onclick = function () {
+            document.getElementsByClassName("chkbb")[1].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[2].onclick = function () {
+            document.getElementsByClassName("chkbb")[2].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[3].onclick = function () {
+            document.getElementsByClassName("chkbb")[3].children[0].click();
+        }
+		document.getElementsByClassName("chkbb")[4].onclick = function () {
+			document.getElementsByClassName("chkbb")[4].style.background = "rgb(13, 233, 13) none repeat scroll 0% 0%";
+            document.getElementsByClassName("chkbb")[4].children[0].click();
+        }
+    }
+</script>

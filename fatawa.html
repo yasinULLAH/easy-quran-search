@@ -1,0 +1,709 @@
+<!--suppress ALL -->
+<html>
+
+<head>
+    <title>Maktaba AM Search with Regular expression (Regex) مکتبہ جبریل سرچ</title>
+    <script src="jquery.min.js"></script>
+    <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
+    <style>
+<--#div a {
+    display: block;
+    padding-top: 6;
+    text-align: right;
+    border-bottom: 1px solid red;
+}-->
+.hidden{
+	display:none;
+}
+
+p {
+    margin-top: -19px !important;
+    padding-right: 7px;
+    padding-left: 17px;
+    box-shadow: 0px -5px 9px;
+    text-decoration: none !important;
+    padding: 12px;
+    font-size: 20px;
+    border-radius: 29px;
+}
+
+#div {
+   <--!columns: 3;-->
+}
+p:nth-child(2n+1) {
+    background: #87ec8780;
+}
+p:nth-child(2n) {
+    background: #60d86099;
+}
+#div a {
+    font-family: jameel noori nastaleeq;
+    font-size: 18px;
+	text-decoration:none !important;
+}
+#searchT {
+	direction: rtl;
+		word-break:keep-all;
+}
+
+* {
+	transition: all .5s;
+}
+
+input {
+	background: rgba(0, 200, 0, 0.5) none repeat scroll 0 0;
+	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) inset, 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+Label, legend {
+
+	display: block;
+
+	margin-left: 3px;
+
+	padding-top: 2px;
+
+	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+
+	font-family: Verdana, Geneva, sans-serif;
+
+	font-size: .9em;
+
+}
+#cnt {
+    position: absolute;
+    left: 40.5%;
+}
+.st {
+	background: #f3f37ee6;
+	text-decoration: none !important;
+}
+
+.inline, legend {
+
+	display: inline-block;
+	padding: 0px !important;
+	margin: 0px;
+
+}
+
+fieldset {
+	direction: rtl !important;
+	padding: 0px !important;
+}
+
+legend {
+	border-bottom: 5px solid #009;
+	tex-align: center;
+	width: 99.5%;
+	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+
+	font-family: Verdana, Geneva, sans-serif;
+
+	font-size: 1.4em;
+
+	border-top: 2px solid #009;
+
+	border-left: 2px solid #009;
+
+	border-right: 2px solid #009;
+
+	border-radius: 10px;
+
+	-webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+
+	-moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+
+	box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+
+	padding: 3px;
+
+}
+
+fieldset {
+    font-family: Jameel Noori Nastaleeq;
+    border: 2px solid #009;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    margin-bottom: 12px;
+    margin-top: 9px;
+}
+
+::placeholder {
+	color: red;
+	opacity: 1 !important;
+	font-size: 200%;
+}
+
+#hrf {
+	color: blue;
+	cursor: pointer;
+	padding-left:6px;
+	font-weight:bold;
+	border-bottom: 1px dotted #605252;
+}
+
+.chkbb {
+    border: 1px solid #605555 !important;
+    padding-left: 14 !important;
+    cursor: pointer !important;
+    background: rgba(9, 3, 4, .1);
+    box-shadow: 5px 2px 8px;
+    padding-right: 14px;
+    border-radius: 20px;
+    margin-left: -10;
+    background: #e6dddd;
+}
+
+#shC {
+    width: 116;
+    height: 34;
+    cursor: pointer;
+    font-size: 13;
+    font: bold !important;
+    border-radius: 16px;
+    background: #09ef09;
+    top: -3px;
+    position: relative;
+}
+
+@media screen and (max-width: 1100px) {
+    #txtR	{
+        display:none !important;
+    }
+	#txt{
+		width:98% !important;
+	}
+	fieldset{
+		display:none !important;
+	}
+	#searchT{
+		display:none !important;
+	}
+	h3{
+		display:none !important;
+	}
+	::placeholder {
+			color: red;
+			opacity: 1 !important;
+			font-size: 100%;
+		}
+}
+
+@media handheld () {
+    #txtR	{
+        display:none !important;
+    }
+	#txt{
+		width:98% !important;
+	}
+	fieldset{
+		display:none !important;
+	}
+	#searchT{
+		display:none !important;
+	}
+	h3{
+		display:none !important;
+	}
+	::placeholder {
+			color: red;
+			opacity: 1 !important;
+			font-size: 100%;
+		}
+}
+
+#hrf::before {
+    content: "{ ";
+}
+#hrf::after {
+
+    content: " }";
+
+}
+#div{
+	margin-top: 36px;
+	direction: rtl;
+	margin-right: 8px;
+}
+ </style>
+</head>
+
+<body onload="searchTT();firstME();">
+<h1 style="display:none">Allaahh Ho Akbar اللہ اکبر </h1>
+<div style="text-align:center" id="searchT">
+</div>
+<div id="demo">
+
+    <fieldset>
+        <legend dir="ltr">&nbsp; Options <span style="text-align: center" id="cnt"></span></legend>
+        <h3 style="text-align:center">
+            <span class='chkbb'><input type="checkbox" style="display:none" id="dpsrch" onclick="rns2()">مترادف الفاظ </input></span>
+            <span class='chkbb'><input type="checkbox" style="display:none" id="engsrch" onclick="clr();">انگریزی سرچ </input></span>
+            <span class='chkbb'><input type="checkbox" style="display:none" id="ch" checked="checked" onclick="rns2()">اعراب کو نظر </input></span>
+            <span class='chkbb'><input type="checkbox" style="display:none" id="od" onclick="rns2()">ترتیب نظرانداز </input></span>
+            <span class='chkbb' style='padding-left: 14px !important;'><button id="shC" value="سرچ رزلٹ ختم" style="display:none;" onclick="localStorage.removeItem('searchT')"><b>سرچ رزلٹ ختم </b></button><b>سرچ رزلٹ ختم </b></span>
+        </h3>
+    </fieldset>
+    <input type="text" width="100%" id="txtR" onclick="checka()" placeholder=" Filter the Search تلاش کو فلٹر کریں" style="width: 49%; height: 48px; direction: RTL;opacity:0.4" disabled="disabled" oninput="rns3()"/>&emsp;
+    <input type="text" width="100%" id="txt" placeholder=" Start Searching Here تلاش یہاں سے شروع کریں" style="width: 49%; height: 48px; direction: RTL" onchange="rns2();searchTT();"/>
+	<input type="hidden" width="100%" id="txtH" style="width: 100%; height: 9%; direction: RTL" onchange="rns2()"/>
+    <h3 style="text-align:center;display:none;">Type Then <button onclick="rns()" style="width:355px;height:44px;font-size:30px;background: green;">بسم اللہ</button>You can search in <a href="https://www.w3schools.com/jsref/jsref_obj_regexp.asp" target="_blank">regular expression</a> Like نماز فضیلت&نماز فضائل&نماز فائد
+    </h3>
+    
+
+   <div id="div"></div>
+</div>
+</body>
+</html>
+<script>
+window.onscroll = function(){
+	if(window.scrollMaxY==window.scrollY){
+	if(document.getElementById("more")!=null){
+		document.getElementById("more").click()
+		}
+	}
+}
+ function excs(data){
+		var txtToR = "|"+data.textContent;
+		var lclst = localStorage.searchT;
+		var nData = lclst.replace(txtToR,"");
+		localStorage.searchT = nData;
+		var tt = "";
+        var dd = localStorage.getItem("searchT");
+        dd = dd.split("|")
+        for (i = 0; i < dd.length; i++) {
+            tt += "<span id='hrf' oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</span>&nbsp;"
+        }
+        $("#searchT")[0].innerHTML = tt;
+		
+ }
+ function theFunc(){
+	if($("#div span[class='hidden']")[0] == undefined){
+		document.getElementById("more").style.display = "none";
+	}else{
+		$("#div span[class='hidden']")[0].setAttribute("class","show")
+		}
+ }
+    function clmm() {
+		///////////////////////////////////////////////////////////////////////////////////////////////// اعراب
+		if ($("#ch:checked").length > 0) {
+		inp = inp.replace(/ؤ|و/g, "(و|ؤ)")
+		inp = inp.replace(/ك|ک/g, "(ك|ک)")
+		inp = inp.replace(/آ|ا|أ|إ/g, "(آ|ا|أ|إ)")
+		inp = inp.replaceAll("ء", "")
+		inp = inp.replace(/ى|ی|ي/g, "(ى|ی|ي)")
+		inp = inp.replace(/ه|ھ/g, "(ه|ھ)")
+		inp = inp.replace(/ة|ۃ/g, "(ة|ۃ)")
+		inp = inp.replace(/[ًٌٍََُِِّْ]/g, "")
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		var theData = "";
+		inp = inp.replaceAll("\"", " ")
+		console.log(inp)
+        var reg = new RegExp(inp, "i");
+        for (i = 0; i < Words.length; i++) {
+            if (reg.test(Words[i].replace(/[ًٌٍََُِِّْ]/g, ""))) {
+                cnt += 1;
+                $("#cnt")[0].innerHTML = "Total Result: " + cnt
+                var assn = inp.replace(/[A-Za-z]/g, "")
+                assn = new RegExp(assn, "i");
+                var aaaw = Words[i].replace(/[ًٌٍََُِِّْ]/g, "").match(assn)[0]
+                var aWords = Words[i].replace(aaaw, "<font class='st'>" + aaaw + "</font>")
+				if(cnt%633==0){
+						theData += "[txtToSpan]<p style='text-align:right;'>"+aWords+"</p>";
+				}else{
+						theData += "<p style='text-align:right;'>"+aWords+"</p>";
+				}
+            } else {
+                $("#cnt")[0].innerHTML = "Total Result: " + cnt
+            }
+        }
+		if(document.getElementById("cnt").textContent != "Total Result: 0"){
+			theData = theData.replace("[txtToSpan]","<span class='hidden'>").replace(/\[txtToSpan\]/g,"</span><span class='hidden'>");
+			$("#div").append(theData)
+			if(cnt<633){
+			}else{
+			document.getElementById("div").innerHTML += '<div id="more" onclick="theFunc()" style="text-align: center;cursor: pointer;color: blue;text-decoration: underline;font-size: 21px;">Load More</div>';
+			}
+		}
+		 $("a").click(function (e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            popup(url)
+        });
+        var aas = document.getElementsByClassName("chkbb");
+        for (i = 0; i < aas.length; i++) {
+            if (aas[i].children[0].checked) {
+                aas[i].style.background = "#0de90d"
+            } else {
+                aas[i].style.background = "#e6dddd"
+            }
+        }
+
+        if ($("#cnt")[0].textContent == "Total Result: 0" || $("#cnt")[0].textContent == "") {
+            $("#txtR").prop("disabled", true);
+            $("#txtR").css("opacity", ".4");
+        } else {
+            $("#txtR").prop("disabled", false);
+            $("#txtR").css("opacity", "1");
+        }
+    }
+
+    function checka() {
+        if ($("#cnt")[0].innerHTML != "") {
+            var aa = parseInt($("#cnt")[0].innerHTML.substr(14));
+            if (aa >= 800) {
+                var pp = prompt("Too Much Result Enter Here:");
+                $("#txtR")[0].value = pp;
+                rns3()
+            }
+        }
+    }
+
+    function searchTT() {
+        console.log("Alllaaahhh")
+        var ee = $("#txt")[0].value;
+        if (localStorage.getItem("searchT")) {
+            var aa = localStorage.getItem("searchT");
+            if (ee != "") {
+                if (localStorage.getItem("searchT").includes(ee)) {
+
+                } else {
+                    var gg = aa + "|" + ee;
+                    localStorage.setItem("searchT", gg);
+                }
+            } else {
+
+            }
+        } else {
+            var ff = "اللہ اکبر|محمد رسول اللہ|نماز کس/کیس/طریق&جمع فر۔ض/وق'ت/شر،ط/و'ج'ب"
+            localStorage.setItem("searchT", ff);
+        }
+        var tt = "";
+        var dd = localStorage.getItem("searchT");
+        dd = dd.split("|")
+        for (i = 0; i < dd.length; i++) {
+            tt += "<span id='hrf' oncontextmenu='excs(this);return false;' onclick='$(\"#txt\")[0].value = this.innerHTML;rns2();'>" + dd[i] + "</span>&nbsp;"
+        }
+        $("#searchT")[0].innerHTML = tt;
+    }
+
+    function loadScript(url, callback) {
+
+        var script = document.createElement("script")
+        script.type = "text/javascript";
+
+        if (script.readyState) { //IE
+            script.onreadystatechange = function () {
+                if (script.readyState == "loaded" ||
+                    script.readyState == "complete") {
+                    script.onreadystatechange = null;
+                    callback();
+                }
+            };
+        } else { //Others
+            script.onload = function () {
+                callback();
+            };
+        }
+
+        script.src = url;
+        document.getElementsByTagName("head")[0].appendChild(script);
+    }
+
+    function rns3() {
+		$("#div span[class='hidden']").attr("class","show")
+		if(document.getElementById("more")!=null){
+			document.getElementById("more").style.display = "none";
+		}
+        $("br").remove()
+        inp = $("#txtR").val()
+        if (inp == "") {
+            $("p").css("display", "block")
+        }
+        str1 = "";
+        str2 = "";
+        inp = inp.replace(/(\d)(\۔)(\d*)/, ".{$1,$3}")
+        inp = inp.replaceAll("۔", ".*")
+        inp = inp.replaceAll("،", ".+")
+        inp = inp.replaceAll("'", ".?")
+        inp = inp.replaceAll("؎", ".")
+        inp = inp.replace(/(\S+)؛/g, "($1){0,1}")
+		inp = inp.replaceAll("ـ", ".*")
+		inp = inp.replaceAll("؟", ".{0,2}")
+        if (inp.includes("&")) {
+            inp = inp.replaceAll("&", "||")
+        }
+        if (inp.includes(" ")) {
+            if (inp.includes("||")) {
+                spl = inp.split("||")
+                for (i = 0; i < spl.length; i++) {
+                    str1 = spl[i].split(/\s/).reverse().join(" ");
+                    inp = inp + "|" + str1
+                }
+
+            } else {
+                inp = inp + "|" + inp.split(/\s/).reverse().join(" ");
+            }
+        }
+		
+		inp = inp.replace(/ؤ|و/g, "(و|ؤ)")
+		inp = inp.replace(/ك|ک/g, "(ك|ک)")
+		inp = inp.replace(/آ|ا|أ|إ/g, "(آ|ا|أ|إ)")
+		inp = inp.replaceAll("ء", "")
+		inp = inp.replace(/ى|ی|ي/g, "(ى|ی|ي)")
+		inp = inp.replace(/ه|ھ/g, "(ه|ھ)")
+		inp = inp.replace(/ة|ۃ/g, "(ة|ۃ)")
+        inp = inp.replace(/[ًٌٍََُِِّْ]/g, "")
+        inp = inp.replace(" ", ".*")
+        var reg = new RegExp(inp, "i");
+        $('p').each(function (i) {
+            if (reg.test($(this).text().replace(/[ًٌٍََُِِّْ]/g, ""))) {
+                $(this).css("display", "block")
+            } else {
+                $(this).css("display", "none");
+            }
+        });
+        var cnt = $("p[style*='display: block;']").length
+        $("#cnt")[0].innerHTML = "Total Result: " + cnt
+
+    }
+
+
+    function rns2() {
+        function isMatch(searchOnString, searchText) {
+            searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
+        }
+		function datam(){
+		if(inp.match(/(\S+)ٓ/)!=null){
+			inp = inp.replaceAll("ٓ","");
+			inp = inp.split("").join().replace(/,/g,"'");
+		}
+		inp = inp.replace(/(\d)(\۔)(\d*)/, ".{$1,$3}")
+		inp = inp.replaceAll("-", ".*")
+		inp = inp.replaceAll("،", ".+")
+		inp = inp.replaceAll("'", ".?")
+		inp = inp.replaceAll("؎", ".")
+		inp = inp.replace(/(\S+)؛/, "($1){0,1}")
+		inp = inp.replaceAll("؟", ".{0,2}")
+		inp = inp.replace(/[a-zA-Z]+/g, "")
+		inp = inp.replaceAll("  ", " ")
+		inp = inp.trim();
+		np = $("#txtH").val(inp);
+		}
+
+        $("#txt")[0].value = $("#txt").val().replaceAll("&amp;", "&")
+        inp = $("#txt").val()
+
+        if ($("#engsrch:checked").length == 0 && $("#dpsrch:checked").length == 0) {
+            dt = "";
+            inp2 = $("#txtH").val(inp);
+            dt = inp
+            loadScript("eng_ur_db.js", function () {
+                aa = a.split("|");
+                for (i = 0; i < aa.length; i++) {
+                    aaa = aa[i].split("-")
+					var gla = new RegExp(aaa[0].replaceAll("/","\|"),'i')
+					if(dt.match(gla)!=null){
+							var mking = "\\b"+aaa[0].replaceAll("/","\|")+"\\b";
+							var ala = new RegExp(mking,'i')
+                            dt = dt.replace(ala,aaa[1])
+                    }
+                }
+				inp = inp.replace(inp, dt)
+                datam()
+                rns();
+            });
+        } else {
+			datam()
+            rns();
+        };
+
+    };
+
+
+    function popup(url) {
+        var width = screen.width / 1.2;
+        var height = screen.width / 1.5;
+        var left = (screen.width - width) / 2;
+        var top = (screen.height - height) / 2;
+        var params = 'width=' + width + ', height=' + height;
+        params += ', top=' + top + ', left=' + left;
+        params += ', directories=no';
+        params += ', location=no';
+        params += ', menubar=no';
+        params += ', resizable=no';
+        params += ', scrollbars=yes';
+        params += ', status=no';
+        params += ', toolbar=no';
+        newwin = window.open(url, 'Allaahh ho akbar', params);
+        if (window.focus) {
+            newwin.focus()
+        }
+        return false;
+    }
+
+    String.prototype.replaceAll = function (search, replacement) {
+        var target = this;
+        return target.replace(new RegExp(search, 'g'), replacement);
+    };
+
+    String.prototype.replaceIt = function (theString) {
+        var aa = this;
+        var theString = theString;
+        theString = theString.replaceAll("-", "|")
+		theString = theString.replaceAll("ـ", ".*")
+        return aa.replaceAll(theString, "(" + theString + ")")
+    };
+
+    function isMatch(searchOnString, searchText) {
+        searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+        return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
+    }
+
+    var Words;
+    var stringData = $.ajax({
+        url: "data.AM",
+        async: false
+    }).responseText;
+	stringData = stringData.replace(/للَّه/g,"للہ");
+	stringData = stringData.replace(/الله/g,"اللہ");
+	stringData = stringData.replace(/لِلَّه/g,"اللہ");
+    //For Changing Directory
+    //Words = stringData.replace(/file:\/\/\/D:\/soft\/MaktabaJibreel\/PDF\//ig,"file:///C:/newpath/")
+    //Words = Words.split("\n")
+    ////////////////////////////////////
+
+    Words = stringData.split("\n")
+	//console.log(Words)
+    //var Words = "allaahh ho akbar\nkabeera";
+    function clr() {
+        $("#dpsrch").prop("checked", false);
+        rns2();
+    }
+
+    function rns() {
+        if ($("#dpsrch:checked").length > 0) {
+            $("#engsrch").prop("checked", false);
+        }
+        if ($("#engsrch:checked").length > 0) {
+            $("#dpsrch").prop("checked", false);
+        }
+
+        inp = $("#txtH").val()
+        if (inp.includes("&")) {
+            var dta = inp.split("&")
+            var dta2 = "";
+            for (i = 0; i < dta.length; i++) {
+                if (dta[i].includes("/")) {
+                    dta2 += dta[i].replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
+                } else {
+                    dta2 += dta[i] + "]]";
+                }
+            }
+            dta2 = dta2.split(' ')
+                .reverse()
+                .join(' ')
+                .replace(/]]/, '')
+                .split(' ')
+                .reverse()
+                .join(' ');
+            dta2 = dta2.replaceAll("]]", "&")
+            inp = dta2.replaceAll("/", "|")
+        } else {
+            var dta = inp
+            var dta2 = "";
+            dta2 += dta.replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
+            dta2 = dta2.split(' ')
+                .reverse()
+                .join(' ')
+                .replace(/]]/, '')
+                .split(' ')
+                .reverse()
+                .join(' ');
+            dta2 = dta2.replaceAll("]]", "&")
+            inp = dta2.replaceAll("/", "|")
+        }
+		inp = inp.replaceAll("ـ", ".*")
+        if (inp == "") {
+            $("#div").html("");
+            $("#cnt")[0].innerHTML = "Total Result: " + 0
+        } else {
+            $("#div").html("");
+            str1 = "";
+            str2 = "";
+            if (inp.includes("&")) {
+                inp = inp.replaceAll("&", "||")
+            }
+
+            if ($("#od:checked").length > 0) {
+                if (inp.includes(" ")) {
+                    if (inp.includes("||")) {
+                        spl = inp.split("||")
+                        for (i = 0; i < spl.length; i++) {
+                            //console.log(spl)
+                            str1 = spl[i].split(/\s/).reverse().join(" ");
+                            inp = inp + "|" + str1
+                        }
+
+                    } else {
+                        inp = inp + "|" + inp.split(/\s/).reverse().join(" ");
+                    }
+                }
+            }
+            cnt = 0;
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("||", "|")
+            inp = inp.replace("۔", "|")
+            inp = inp.replaceAll(" ", ".{0,}")
+            if ($("#dpsrch:checked").length != 0) {
+                loadScript("fatawa.js", function () {
+                    inp = inp.trim();
+                    clmm()
+                });
+            }
+            if ($("#engsrch:checked").length == 0 && $("#dpsrch:checked").length == 0) {
+                clmm()
+            }
+
+            if ($("#engsrch:checked").length != 0) {
+                loadScript("fatawa_eng.js", function () {
+                    inp = inp.trim();
+                    clmm()
+                });
+            }
+        }
+
+    }
+
+    function firstME() {
+        document.getElementsByClassName("chkbb")[0].onclick = function () {
+            document.getElementsByClassName("chkbb")[0].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[1].onclick = function () {
+            document.getElementsByClassName("chkbb")[1].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[2].onclick = function () {
+            document.getElementsByClassName("chkbb")[2].children[0].click();
+        }
+        document.getElementsByClassName("chkbb")[3].onclick = function () {
+            document.getElementsByClassName("chkbb")[3].children[0].click();
+        }
+		document.getElementsByClassName("chkbb")[4].onclick = function () {
+			document.getElementsByClassName("chkbb")[4].style.background = "rgb(13, 233, 13) none repeat scroll 0% 0%";
+            document.getElementsByClassName("chkbb")[4].children[0].click();
+        }
+    }
+</script>
