@@ -389,10 +389,22 @@ let quranPage = parseInt(localStorage.getItem("quranPage")) || 0;
 let isQuranMode = false;
 
 function theRand() {
+    if (!Words || Words.length === 0) {
+        document.getElementById("div").innerHTML = "<p style='text-align: center;'>ڈیٹا لوڈ ہو رہا ہے، براہ کرم انتظار کریں</p>";
+        return;
+    }
     var theData = "";
-    var max = location.href.includes("Quran") || location.href.includes("Jtr") || location.href.includes("deoband") || location.href.includes("Lughat2") || location.href.includes("Hadith") ? 560 : 215400;
-    for (let i = 0; i < 13; i++) {
-        theData += "<p>" + Words[Math.round(1 + Math.random() * max)] + "</p>";
+    var max = Words.length;
+    var selectedIndices = new Set();
+    while (selectedIndices.size < 10 && selectedIndices.size < max) {
+        let index = Math.floor(Math.random() * max);
+        if (Words[index] && !selectedIndices.has(index)) {
+            theData += "<p dir='auto'>" + Words[index] + "</p>";
+            selectedIndices.add(index);
+        }
+    }
+    if (selectedIndices.size === 0) {
+        theData = "<p style='text-align: center;'>کوئی درست آیات نہیں ملیں</p>";
     }
     document.getElementById("div").innerHTML = theData;
     $("a").click(function (e) {
