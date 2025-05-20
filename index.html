@@ -496,7 +496,7 @@ if (!location.href.includes("Select")) {
 }
 
 var Words, stringData;
-if (!localStorage.db) {
+if (!localStorage.dbq) {
     $.ajax({
         xhr: function () {
             var xhr = new window.XMLHttpRequest();
@@ -526,12 +526,12 @@ if (!localStorage.db) {
                 Words = stringData.split("\n");
             }
             localforage.setItem("Data", stringData, function () {
-                localStorage.db = "2";
+                localStorage.dbq = "5";
             });
             theRand();
         }
     });
-} else if (localStorage.db == "1") {
+} else if (localStorage.dbq == "4") {
     $.ajax({
         xhr: function () {
             var xhr = new window.XMLHttpRequest();
@@ -561,7 +561,7 @@ if (!localStorage.db) {
                 Words = stringData.split("\n");
             }
             localforage.setItem("Data", stringData, function () {
-                localStorage.db = "2";
+                localStorage.dbq = "2";
             });
             theRand();
         }
@@ -798,7 +798,7 @@ function displayAyah(index) {
 
 function addQuranReader() {
     const readerBtn = document.createElement("div");
-    readerBtn.innerHTML = `<button id='quranReader' title='قرآن پڑھیں' style='position: fixed; top: 2px; right: 10px; background: #09ef09; border-radius: 50%; width: 50px; height: 50px; cursor: pointer; font-size: 24px; text-align: center; line-height: 50px; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);'>📚</button>`;
+    readerBtn.innerHTML = `<button id='quranReader' title='قرآن پڑھیں'>📚</button>`;
     document.body.appendChild(readerBtn);
     document.getElementById("quranReader").onclick = function () {
         isQuranMode = true;
@@ -1232,4 +1232,131 @@ setTimeout(function() {
 }, 500);
 
 
+
+// Global thachka function, as it's referenced by the checkbox onclick
+function thachka() {
+    // Ensure this function is called after the elements are created.
+    const settingsCheckbox = document.querySelector("#settings > input[type=checkbox]");
+    const settingsSpan = document.getElementById("settings");
+    
+    // Attempt to get the first fieldset on the page.
+    // It's possible no fieldset exists, so we need to handle that.
+    const fieldsetElement = document.getElementsByTagName("fieldset")[0];
+
+    // This 'if' block was in your original code.
+    // It checks for 'settingsa' in localStorage but doesn't use the value of 'stati'.
+    if (localStorage.getItem("settingsa")) {
+        var stati = localStorage.getItem("settings"); // 'stati' is declared but not used.
+    } else {
+        // else block is empty as in original
+    }
+
+    // It's crucial that settingsCheckbox and settingsSpan exist.
+    // If they were not found, it indicates an issue with element creation or IDs.
+    if (!settingsCheckbox) {
+        console.error("Error: Settings checkbox input not found inside #settings span.");
+        return;
+    }
+    if (!settingsSpan) {
+        console.error("Error: Settings span with id 'settings' not found.");
+        return;
+    }
+
+    const states = settingsCheckbox.checked;
+
+    if (states === true) {
+        if (fieldsetElement) {
+            fieldsetElement.style.display = "block";
+        } else {
+            // console.warn("thachka: fieldset element not found, cannot set display to 'block'.");
+        }
+        localStorage.setItem("settings", "true");
+        settingsSpan.style.top = "2rem";
+        settingsSpan.style.left = "6rem";
+    } else {
+        if (fieldsetElement) {
+            fieldsetElement.style.display = "none";
+        } else {
+            // console.warn("thachka: fieldset element not found, cannot set display to 'none'.");
+        }
+        localStorage.setItem("settings", "false");
+        settingsSpan.style.top = "2px";
+        settingsSpan.style.left = "0px";
+    }
+}
+
+// Function to create elements, apply styles, and set up initial state
+function initializeSettingsPanel() {
+    // 1. Create HTML elements dynamically
+    const settingsSpan = document.createElement('span');
+    settingsSpan.id = 'settings';
+
+    const settingsCheckbox = document.createElement('input');
+    settingsCheckbox.type = 'checkbox';
+    settingsCheckbox.checked = true; // Default state, will be overridden by localStorage if present
+    settingsCheckbox.title = 'Show & Hide Settings Panel';
+    settingsCheckbox.onclick = thachka; // Assign the global thachka function
+
+    settingsSpan.appendChild(settingsCheckbox);
+    document.body.appendChild(settingsSpan); // Append to the body or a specific container
+
+    // 2. Apply styles to the settingsSpan (from your CSS: span#settings)
+    settingsSpan.style.position = 'absolute';
+    settingsSpan.style.left = '6rem';
+    settingsSpan.style.top = '2rem';
+    settingsSpan.style.zIndex = '1000000';
+
+    // Regarding "//hide on mobile view #settings{ display: none; }"
+    // If this rule was intended for the span#settings element, applying settingsSpan.style.display = 'none';
+    // would make the checkbox and its container invisible, which contradicts its interactive nature.
+    // Typically, "hide on mobile" is done with CSS media queries.
+    // If you need a JS-only media query equivalent, it would involve checking window.innerWidth
+    // or using window.matchMedia and applying display:none conditionally.
+    // For this exact replication, I am focusing on the provided active styles for span#settings.
+
+    // 3. Implement "on window load or document ready" logic
+    const savedSettingsState = localStorage.getItem("settings");
+
+    if (savedSettingsState !== null) { // Check if the item exists in localStorage
+        if (savedSettingsState === "false") {
+            settingsCheckbox.checked = false;
+        } else {
+            // Handles "true" or any other non-"false" string value as true
+            settingsCheckbox.checked = true;
+        }
+        thachka(); // Call thachka to apply the loaded state (show/hide fieldset and position span)
+    } else {
+        // If "settings" is not in localStorage, the checkbox remains in its default 'checked = true' state.
+        // The original "on window load" script did not call thachka() in this case.
+        // So, the span#settings would retain its initial position ('6rem', '2rem') set above,
+        // and the fieldset's visibility would depend on its default CSS or state.
+        // If you want thachka() to run even if localStorage is empty to ensure consistency:
+        // thachka(); // Uncomment this if thachka should always run on init.
+        // However, to match the original logic "exactly", it's only called if 'settings' is in localStorage.
+    }
+}
+
+// 4. Ensure the script runs after the DOM is fully loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSettingsPanel);
+} else {
+    // DOMContentLoaded has already fired
+    initializeSettingsPanel();
+}
+
+// For demonstration, if you don't have a fieldset on your page,
+// you might want to add one to see the effects of thachka():
+/*
+if (!document.getElementsByTagName("fieldset")[0]) {
+    const demoFieldset = document.createElement('fieldset');
+    const legend = document.createElement('legend');
+    legend.textContent = 'Settings Area';
+    demoFieldset.appendChild(legend);
+    demoFieldset.innerHTML += '<p>This is a demo fieldset. Its visibility is controlled by the checkbox.</p>';
+    demoFieldset.style.border = '1px dashed #ccc';
+    demoFieldset.style.padding = '10px';
+    demoFieldset.style.marginTop = '80px'; // Space below the settings checkbox
+    document.body.appendChild(demoFieldset);
+}
+*/
 </script>
