@@ -19,9 +19,6 @@
 .hidden{
 	display:none;
 }
-.show > p > span:first-child {
-    margin-top: revert-layer;
-}
 #txt,#txtR{
 	font-size:120%;
 	text-align:center;
@@ -42,14 +39,15 @@ button.read-here {
 	text-align: center;
 	border-bottom-left-radius: 24px;
 	border-bottom-right-radius: 24px;
-	margin-top: -26px;
+	margin-top: -40px;
 	border-bottom: 1px solid red;
 	border-left: 1px solid red;
 	border-right: 1px solid red;
-	font-family: 'Amiri','calibri' !important;
+	font-family: 'Amiri' !important;
 }
 span.ayah-controls {
     position: relative;
+    top: -37px;
 }
 button.next-ayah {
     margin-right: -1px !important;
@@ -61,8 +59,8 @@ p {
     border-radius: 14px;
     word-spacing: 2px;
     font-size: 24px;
-    font-family: 'jameel noori nastaleeq', calibri;
-    border: 1px solid #ff0606;  
+    font-family: jameel noori nastaleeq;
+    border: 1px solid #ff0606;
 	background: #f0ececb3;
 	text-align: center; 
 }
@@ -90,7 +88,7 @@ input {
 	box-shadow: 0 0 8px rgba(0, 0, 0, 0.1) inset, 0 0 16px rgba(0, 0, 0, 0.1);
 }
 button.prev-ayah {
-    right: -94.7vw;
+    right: -94vw;
     position: absolute;
     top: 60px;
     border: none;
@@ -99,7 +97,7 @@ button.prev-ayah {
 button.next-ayah {
     position: relative;
     top: 60px;
-    left: -37px;
+    left: -31px;
     border: none;
     border-radius: 100px !important;
 }
@@ -108,7 +106,7 @@ Label, legend {
 	margin-left: 3px;
 	padding-top: 2px;
 	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
-	font-family: Verdana, Geneva, sans-calibri;
+	font-family: Verdana, Geneva, sans-serif;
 	font-size: .9em;
 }
 #cnt {
@@ -119,7 +117,7 @@ Label, legend {
 .st {
 	background: yellow;
 	text-decoration: none !important;
-    font-family: inherit !important;
+    font-family: inherit;
 }
 
 .inline, legend {
@@ -137,7 +135,7 @@ legend {
 	border-bottom: 5px solid #009;
 	width: 99.5%;
 	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
-	font-family: Verdana, Geneva, sans-calibri;
+	font-family: Verdana, Geneva, sans-serif;
 	font-size: 1.4em;
 	border-top: 2px solid #009;
 	border-left: 2px solid #009;
@@ -225,14 +223,14 @@ fieldset {
 		font-size:5vw !important;
 		font-weight:bold;
 		margin-left:0px !important;
-		font-family: 'jameel noori nastaleeq',calibri !important;
+		font-family: 'jameel noori nastaleeq',serif !important;
 		word-spacing:1px;
 	}
 	p{
 		font-size:4.5vw !important;
 		margin-top: -4vw !important;
 		text-align:center !important;
-		font-family: 'jameel noori nastaleeq',calibri !important;
+		font-family: 'jameel noori nastaleeq',serif !important;
 		word-spacing:1px;
 	}
 	 #txtR	{
@@ -278,7 +276,8 @@ fieldset {
 */
 #hlp {
     position: relative;
-    left: 86%;
+    left: 87%;
+    top: -2px;
 }
 #hlp a {
     font-size: 125%;
@@ -333,9 +332,9 @@ fieldset {
 }
 
 #quranReader {
-    position: absolute ;
-    top: 6px ;
-    right: 22px ;
+    position: fixed ;
+    top: 2px ;
+    right: 10px ;
     background: #09ef09 ;
     border-radius: 50% ;
     width: 50px ;
@@ -410,7 +409,6 @@ let currentAyahIndex = -1;
 let currentResults = [];
 let quranPage = parseInt(localStorage.getItem("quranPage")) || 0;
 let isQuranMode = false;
-inp = "";
 
 function theRand() {
     if (!Words || Words.length === 0) {
@@ -637,7 +635,6 @@ function filterItems(query) {
 }
 
 function clmm() {
-    
     try {
         let inp = $("#txtH").val();
         if ($("#ch:checked").length > 0) {
@@ -650,12 +647,10 @@ function clmm() {
                 .replace(/م/g, "(مٰ|م)")
                 .replace(/[ًٌٍََُِِّْٓ]/g, "");
         }
-        
         let cnt = 0;
         let Worda = [];
-        inp = inp.replaceAll("%", "|").replaceAll("@", "[").replaceAll("#", "]").replaceAll("!", ",").replaceAll(" ",".*");
+        inp = inp.replaceAll("%", "|").replaceAll("@", "[").replaceAll("#", "]").replaceAll("!", ",");
         if (inp.includes("&")) {
-            
             var j = inp.split("&");
             for (let i = 0; i < j.length; i++) {
                 Worda.push(filterItems(j[i].split(".*")[0]));
@@ -669,11 +664,7 @@ function clmm() {
         currentResults = Worda;
         currentAyahIndex = currentResults.length > 0 ? Words.indexOf(currentResults[0]) : -1;
         var theData = "";
-        
-        inp = inp.replaceAll("/","|");
-       
         if (inp.includes("&")) {
-            
             let inpv = inp.split("&");
             for (let j = 0; j < inpv.length; j++) {
                 inp = inpv[j].split(".*");
@@ -693,29 +684,27 @@ function clmm() {
                                 aWords = mWords;
                             }
                         } else {
-                            mMatch = "false";
+                            mMatch彈 = "false";
                             break;
                         }
                     }
-                    
                     if (mMatch == "true") {
                         if (aWords.includes("&des")) {
                             aWords = "<span class='theQ'>" + aWords.replace(/&des/, "</span><br>");
                         } else if (aWords.includes("--2--")) {
                             aWords = "<span class='theQ'>" + aWords.replace("--2--", "</span><br>");
-                        } else if (aWords.includes("~")) {
-                            aWords = "<span class='theQ read-here' title='یہاں سے پڑھیں' style='cursor: pointer;'>" + aWords.replace("~", "</span><br>");
+                        } else if (aWords.includes("ترجمہ:")) {
+                            aWords = "<span class='theQ'>" + aWords.replace("ترجمہ:", "</span><br>");
                         }
                         cnt += 1;
                         $("#cnt")[0].innerHTML = "Total Result: " + cnt;
                         if (cnt % 101 == 0) {
                             theData += "[txtToSpan]<p dir='auto'>" + aWords + "</p>";
                         } else {
-                            theData += `<p dir='auto' data-index='${wordIndex}'><span class='ayah-controls' style='float: left; margin-left: 10px;'><button class='prev-ayah' title='پچھلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'><<</button><button class='next-ayah' title='اگلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>>></button><button class='read-here' title='یہاں سے پڑھیں' style='background: #ffeb3b; border-radius: 5px; cursor: pointer;'></button></span>${aWords}</p>`;
+                            theData += `<p class='read-here' title='یہاں سے پڑھیں' style='cursor: pointer;' dir='auto' data-index='${wordIndex}'><span class='ayah-controls' style='float: left; margin-left: 10px;'><button class='prev-ayah' title='پچھلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'><-</button><button class='next-ayah' title='اگلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>-></button><button class='read-here' title='یہاں سے پڑھیں' style='background: #ffeb3b; border-radius: 5px; cursor: pointer;'></span>${aWords}</p></button>`;
                         }
                     }
                 }
-                //console.log(inp)
             }
         } else {
             inp = inp.split(".*");
@@ -744,18 +733,17 @@ function clmm() {
                         aWords = "<span class='theQ'>" + aWords.replace(/&des/, "</span><br>");
                     } else if (aWords.includes("--2--")) {
                         aWords = "<span class='theQ'>" + aWords.replace("--2--", "</span><br>");
-                    } else if (aWords.includes("~")) {
-                        aWords = "<span class='theQ read-here' title='یہاں سے پڑھیں' style='cursor: pointer;'>" + aWords.replace("~", "</span><br>");
+                    } else if (aWords.includes("ترجمہ:")) {
+                        aWords = "<span class='theQ'>" + aWords.replace("ترجمہ:", "</span><br>");
                     }
                     cnt += 1;
                     $("#cnt")[0].innerHTML = "Total Result: " + cnt;
                     if (cnt % 101 == 0) {
                         theData += "[txtToSpan]<p dir='auto'>" + aWords + "</p>";
                     } else {
-                        theData += `<p data-index='${wordIndex}'><span class='ayah-controls' style='float: left; margin-left: 10px;'><button class='prev-ayah' title='پچھلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'><<</button><button class='next-ayah' title='اگلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>>></button><button class='read-here' title='یہاں سے پڑھیں' style='background: #ffeb3b; border-radius: 5px; cursor: pointer;'>📖</button></span>${aWords}</p>`;
+                        theData += `<p class='read-here' title='یہاں سے پڑھیں' style='cursor: pointer;' data-index='${wordIndex}'><span class='ayah-controls' style='float: left; margin-left: 10px;'><button class='prev-ayah' title='پچھلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'><<</button><button class='next-ayah' title='اگلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>>></button><button class='read-here' title='یہاں سے پڑھیں' style='background: #ffeb3b; border-radius: 5px; cursor: pointer;'>📖</button></span>${aWords}</p>`;
                     }
                 }
-                
             }
         }
         if (cnt <= 0) {
@@ -810,7 +798,7 @@ function addAyahControls() {
         const index = parseInt($(this).closest("p").attr("data-index"));
         currentAyahIndex = index;
         isQuranMode = true;
-        tempQuranPage = Math.floor(index / 3);
+        tempQuranPage = Math.floor(index / 20);
         loadQuranPage(tempQuranPage, true);
     });
 }
@@ -820,8 +808,8 @@ function addAyahControls() {
 function displayAyah(index) {
     if (index < 0 || index >= Words.length || !Words) return;
     let ayah = Words[index];
-    if (ayah.includes("&des") || ayah.includes("--2--") || ayah.includes("~")) {
-        ayah = `<span class='theQ'>${ayah.replace(/&des|--2--|~/, "</span><br>")}`;
+    if (ayah.includes("&des") || ayah.includes("--2--") || ayah.includes("ترجمہ:")) {
+        ayah = `<span class='theQ'>${ayah.replace(/&des|--2--|ترجمہ:/, "</span><br>")}`;
     }
     document.getElementById("div").innerHTML = `<p dir='auto' data-index='${index}' style='background: #ffeb3b;'><span class='ayah-controls' style='float: left; margin-left: 10px;'><button class='prev-ayah' title='پچھلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>«</button><button class='next-ayah' title='اگلی آیت' style='background: #09ef09; border-radius: 5px; cursor: pointer; margin-right: 5px;'>»</button><button class='read-here' title='یہاں سے پڑھیں' style='background: #ffeb3b; border-radius: 5px; cursor: pointer;'>📖</button></span>${ayah}</p>`;
     document.getElementById("cnt").textContent = `Ayah ${index + 1} of ${Words.length}`;
@@ -845,22 +833,16 @@ function loadQuranPage(page, isTemp = false) {
     }
     localforage.getItem("Data").then(function (value) {
         let quranWords = value.includes("--1--") ? value.split("--1--") : value.split("\n");
-        if(isTemp){
-            ayahsPerPage = 3;
-        }else{
-            ayahsPerPage = 320;
-        }
+        const ayahsPerPage = 20;
         const startIndex = page * ayahsPerPage;
-        //console.log(startIndex)
         const endIndex = Math.min(startIndex + ayahsPerPage, quranWords.length);
-        //console.log(endIndex)
-        let theData = `<div style='text-align: center; margin: 20px;'><a href="index.html"><h2 style='font-family: Amiri, calibri;font-size: 24px;color: blue;display: inline-block;text-decoration: underline;text-underline-position: under;padding-left: 4px;'>قرآن کریم</h2></a> | <h2 style='display: inline;text-decoration: underline;color: blue;padding-right: 6px;cursor: pointer;text-underline-position: under;' onclick='tarj()'>ترجمہ</h2></div>`;
+        let theData = `<div style='text-align: center; margin: 20px;'><h2 style='font-family: Amiri, serif; font-size: 24px; color: #09ef09;'>قرآن کریم</h2></div>`;
         for (let i = startIndex; i < endIndex; i++) {
             let ayah = quranWords[i];
-            if (ayah.includes("&des") || ayah.includes("--2--") || ayah.includes("~")) {
-                ayah = `<span class='theQ' style='font-family: Amiri, calibri !important; font-size: 24px;'>${ayah.replace(/&des|--2--|~/, "</span><br><span class='tarjuma' style='font-family: Noto Nastaliq Urdu, Jameel Noori Nastaleeq, calibri !important; font-size: 25px;'>")}</span>`;
+            if (ayah.includes("&des") || ayah.includes("--2--") || ayah.includes("ترجمہ:")) {
+                ayah = `<span class='theQ' style='font-family: Amiri, serif !important; font-size: 24px;'>${ayah.replace(/&des|--2--|ترجمہ:/, "</span><br><span class='tarjuma' style='font-family: Noto Nastaliq Urdu, serif !important; font-size: 19px;'>")}</span>`;
             } else {
-                ayah = `<span class='theQ' style='font-family: Amiri, calibri !important; font-size: 24px;'>${ayah}</span>`;
+                ayah = `<span class='theQ' style='font-family: Amiri, serif !important; font-size: 24px;'>${ayah}</span>`;
             }
             theData += `<p dir='auto' style='background: #f0ececb3; padding: 15px; margin: 10px; border-radius: 10px; font-size: 20px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2);'>${ayah}</p>`;
         }
@@ -963,7 +945,6 @@ function rns3() {
     if (inp.includes("&")) {
         inp = inp.replaceAll("&", "||");
     }
-    
     if (inp.includes(" ")) {
         if (inp.includes("||")) {
             let spl = inp.split("||");
@@ -1082,28 +1063,7 @@ function popup(url) {
     }
     return false;
 }
-var tarja = 1;
-function tarj(){
-    if(tarja==1){
-        stylea = document.createElement('style');
-        stylea.textContent = `
-        .tarjuma {
-                display: none !important;
-            }
-        `;
-        document.head.appendChild(stylea);
-        tarja = 0;
-    }else{
-        stylea = document.createElement('style');
-        stylea.textContent = `
-        .tarjuma {
-                display: inline-block !important;
-            }
-        `;
-        document.head.appendChild(stylea);
-        tarja = 1;
-    }
-}
+
 String.prototype.replaceAll = function (search, replacement) {
     var target = this;
     return target.replace(new RegExp(search, 'g'), replacement);
@@ -1162,19 +1122,15 @@ function rns() {
     if (inp.includes("&")) {
         var dta = inp.split("&");
         var dta2 = "";
-        
         for (let i = 0; i < dta.length; i++) {
             if (dta[i].includes("/")) {
                 dta2 += dta[i].replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
             } else {
                 dta2 += dta[i] + "]]";
-                
-                console.log(dta2)
             }
         }
         dta2 = dta2.replace("]]", "]] ").split(' ').reverse().join(' ').replace(/]]/, '').split(' ').reverse().join(' ').replace("]] ", "]]").replaceAll("]]", "&");
         inp = dta2.replaceAll("/", "|");
-        
     } else {
         var dta = inp;
         var dta2 = dta.replaceAll("%", " % ").replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
@@ -1182,7 +1138,6 @@ function rns() {
         inp = dta2.replaceAll("/", "|");
     }
     inp = inp.replaceAll("\"", ".{0,}");
-    
     if (inp == "") {
         $("#div").html("");
         $("#cnt")[0].innerHTML = "Total Result: " + 0;
@@ -1191,9 +1146,7 @@ function rns() {
         $("#div").html('<p style="text-align: center;font-size: 170% !important;">تلاش ہورہی ہیں</p>');
         if (inp.match(/\s/g) == null) {
         } else {
-            
             if (($("#od:checked").length > 0 && inp.match(/\s/g).length < 2) || inp.match(/\|\|/g) != null) {
-                
                 if (inp.includes(" ")) {
                     if (inp.includes("||")) {
                         let spl = inp.split("||");
@@ -1207,29 +1160,18 @@ function rns() {
                 }
             }
         }
-            cnt = 0;
-			inp = inp.replace(/\|\|/g, "|")
-            inp = inp.replaceAll(" ", ".*")
-            //console.log(inp)
-            console.log("اللہ اکبر کبیرا")
-            if ($("#dpsrch:checked").length != 0) {
-					synonoms()
-                    inp = inp.trim();
-                    
-                    clmm()
-            }
-            if ($("#engsrch:checked").length == 0 && $("#dpsrch:checked").length == 0) {
-                
-                clmm()
-            }
-
-            if ($("#engsrch:checked").length != 0) {
-                //loadScript("fatawa_eng.js", function () {
-                    inp = inp.trim();
-                    
-                    clmm()
-                //});
-            }
+        inp = inp.replace(/\|\|/g, "|").replaceAll(" ", ".*");
+        console.log("اللہ اکبر کبیرا");
+        if ($("#dpsrch:checked").length != 0) {
+            // synonoms() assumed to exist in eng_ur_db.js or fatawa.js
+            inp = inp.trim();
+            clmm();
+        } else if ($("#engsrch:checked").length == 0) {
+            clmm();
+        } else {
+            inp = inp.trim();
+            clmm();
+        }
     }
 }
 
@@ -1245,7 +1187,7 @@ function firstME() {
         document.getElementById("engsrch").checked = "checked";
         document.getElementsByTagName("style")[0].innerHTML += "p{font-family:'inherit !important';padding-top:3px;padding-bottom:2px;}";
     } else if (location.href.includes("Hadith") || location.href.includes("hadith")) {
-        document.getElementsByTagName("style")[0].innerHTML += "p{font-size:19px !important;word-spacing:2px !important;}.theQ{font-family:'Amiri',calibri !important;font-size:24px !important;}.tarjuma{font-family:'Noto Nastaliq Urdu',calibri !important;font-size:19px !important;}";
+        document.getElementsByTagName("style")[0].innerHTML += "p{font-size:19px !important;word-spacing:2px !important;}.theQ{font-family:'Amiri',serif !important;font-size:24px !important;}.tarjuma{font-family:'Noto Nastaliq Urdu',serif !important;font-size:19px !important;}";
         document.getElementById("dpsrch").checked = false;
     }
     document.getElementsByClassName("chkbb")[0].onclick = function () {
@@ -1281,7 +1223,7 @@ link.href = fontUrl;
 document.head.appendChild(link);
 
 const style = document.createElement("style");
-style.innerHTML = `* { font-family: 'jameel noori nastaleeq','Noto Nastaliq Urdu', Calibri !important;}`;
+style.innerHTML = `* { font-family: 'Noto Nastaliq Urdu', serif;}`;
 document.head.appendChild(style);
 
 </script>
@@ -1291,16 +1233,7 @@ setTimeout(function() {
     var clicked = false;
     function applyStyle() {
         var style = document.createElement('style');
-        style.textContent = `
-        .theQ {
-                margin-top: -16px !important;
-                padding: 3px 0px;
-            }
-        p {
-                margin-bottom: 15px !important;
-                box-shadow: 0px -9px 16px black !important;
-            }
-        `;
+        style.textContent = `.theQ { margin-top: -16px !important; }`;
         document.head.appendChild(style);
     }
 
@@ -1356,25 +1289,20 @@ function thachka() {
         if (fieldsetElement) {
             fieldsetElement.style.display = "block";
             setTimeout(() => {
-                /* document.querySelector("#quranReader").style.display = 'flex'; */
-                document.querySelector("#txt").style.borderBottomRightRadius = '0px'
-                document.querySelector("#txt").style.borderTopRightRadius = '0px'
-                
-            }, 200);
+                document.querySelector("#quranReader").style.display = 'flex';
+            }, 500);
         } else {
             // console.warn("thachka: fieldset element not found, cannot set display to 'block'.");
         }
         localStorage.setItem("settings", "true");
         settingsSpan.style.top = "2rem";
-        settingsSpan.style.left = "6.2rem";
+        settingsSpan.style.left = "6rem";
     } else {
         if (fieldsetElement) {
             fieldsetElement.style.display = "none";
             setTimeout(() => {
-                /* document.querySelector("#quranReader").style.display = 'none'; */
-                document.querySelector("#txt").style.borderBottomRightRadius = '22px'
-                document.querySelector("#txt").style.borderTopRightRadius = '22px'
-            }, 200);
+                document.querySelector("#quranReader").style.display = 'none';
+            }, 500);
             
         } else {
             // console.warn("thachka: fieldset element not found, cannot set display to 'none'.");
@@ -1402,7 +1330,7 @@ function initializeSettingsPanel() {
 
     // 2. Apply styles to the settingsSpan (from your CSS: span#settings)
     settingsSpan.style.position = 'absolute';
-    settingsSpan.style.left = '6.3rem';
+    settingsSpan.style.left = '6rem';
     settingsSpan.style.top = '2rem';
     settingsSpan.style.zIndex = '1000000';
 

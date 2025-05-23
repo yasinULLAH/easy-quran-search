@@ -1,8 +1,8 @@
 <html manifest="maktab.appcache">
 <head>
-<title>Maktabatullah Maktaba Jibreel Advance Search Engine with Regular expression</title>
-<meta name="Description" content="Maktabatullah regex(regular expression) searching engine for Maktaba Jibreel مکتبہ جبریل سرچ (تلاش)">
-<meta name="Keywords" content="Maktabatullah,Fatawa and fiqha search,maktaba jibreel search engine,islamic search engine,fatwa search,fatawa' fatwa and fiqha advance with regex search engine">
+<title>Maktabatullah Lughat Advance Search Engine with Regular expression</title>
+<meta name="Description" content="Maktabatullah regex(regular expression) searching engine for Maktaba Jibreel لغت سرچ (تلاش)">
+<meta name="Keywords" content="Maktabatullah,Lughat, Urdu Lughat, Arabic Lughat, English Lughat, Dictionary and fiqha search,maktaba jibreel search engine,islamic search engine,fatwa search,fatawa' fatwa and fiqha advance with regex search engine">
 <script src="jquery.min.js"></script>
 <meta content="text/html; charset=utf-8" http-equiv=Content-Type>
 <script src="localforage.js"></script>
@@ -10,7 +10,7 @@
 <style>
 .jml {
     display: inline-block;
-    font-family: jameel noori nastaleeq;
+    font-family: 'jameel noori nastaleeq';
     word-spacing: 4px;
     background: #54b9544d;
     padding-left: 4px !important;
@@ -40,7 +40,7 @@
 	border-bottom: 1px solid red;
 	border-left: 1px solid red;
 	border-right: 1px solid red;
-	font-family:muhammadi quranic font, calibri !important;
+	font-family:muhammadi quranic font;
 }
 p {
     margin-top: -16px !important;
@@ -48,15 +48,11 @@ p {
     padding-left: 17px;
     border-radius: 14px;
     word-spacing: 2px;
-    font-size: 22px;
-    font-family: jameel noori nastaleeq;
+    font-size: 1.5vw;
     border: 1px solid #ff0606;
 	 background: #f0ececb3;
 }
 
-* {
-    font-family: "jameel noori nastaleeq, calibri !important";
-}
 #div {
 	margin-top: 22px;
 	direction: rtl;
@@ -95,6 +91,7 @@ Label, legend {
 .st {
 	background: yellow;
 	text-decoration: none !important;
+	font-family: inherit !important;
 }
 
 .inline, legend {
@@ -109,21 +106,20 @@ fieldset {
 }
 
 legend {
-	border-bottom: 5px solid #009;
-	tex-align: center;
-	width: 99.5%;
-	text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
-	font-family: Verdana, Geneva, sans-serif;
-	font-size: 1.4em;
-	border-top: 2px solid #009;
-	border-left: 2px solid #009;
-	border-right: 2px solid #009;
-	border-radius: 10px;
-	-webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
-	-moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
-	box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
-	padding: 3px;
-
+    border-bottom: 5px solid #009;
+    tex-align: center;
+    width: 100.1%;
+    text-shadow: 2px 2px 3px rgba(150, 150, 150, 0.75);
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.4em;
+    border-top: 2px solid #009;
+    border-left: 2px solid #009;
+    border-right: 2px solid #009;
+    border-radius: 10px;
+    -webkit-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    box-shadow: 4px 4px 5px rgba(50, 50, 50, 0.75);
+    padding: 3px;
 }
 
 fieldset {
@@ -176,6 +172,9 @@ fieldset {
 }
 
 @media screen and (max-width: 1100px) {
+	#settings{
+		display: none;
+	}
 	#div {
 		width: 100% !important;
 		 margin-top: 23px !important;
@@ -208,6 +207,7 @@ fieldset {
 		font-family: 'jameel noori nastaleeq',serif !important;
 		word-spacing:1px;
 	}
+	
 	 #txtR	{
         display:none !important;
     }
@@ -305,7 +305,26 @@ fieldset {
     padding-bottom: 3px;
     width: 95%;
 }
+
+div#searchT {
+    display: none !important;
+}
+select, input, div#more, #cnt{
+	font-family: 'jameel noori nastaleeq' !important;
+}
+
+div#more {
+    text-underline-position: under;
+}
+span#settings {
+    position: absolute;
+    left: 6rem;
+    top: 2rem;
+	z-index: 1000000;
+}
  </style>
+
+ 
 </head>
 
 <body onload="searchTT();firstME();">
@@ -313,17 +332,19 @@ fieldset {
 <div style="text-align:center;display:none" id="searchT">
 </div>
 <div id="demo">
+<span id="settings" ><input Type="checkbox" checked="true" title="Show & Hide Settings Panel" onclick="thachka()"/>
+</span>
 
     <fieldset>
-        <legend dir="ltr">&nbsp; Options <span style="text-align: center" id="cnt">Maktabatullah a maktaba Jibreel search Engine</span>
-		<span id="hlp"><a target="_blank" title="مدد حاصل کرنے کیلئے یہاں کلک کریں" onmouseover="document.getElementById('cnt').textContent='مدد حاصل کرنے کیلئے یہاں کلک کریں'" onmouseleave="document.getElementById('cnt').textContent='Maktabatullah a maktaba Jibreel search Engine'" href="https://www.youtube.com/playlist?list=PLo3sP1OMxs0gpMhm7PHuhZvWV38xV3XwH">?</a></span>
+        <legend dir="ltr">&nbsp; Options <span style="text-align: center" id="cnt">Maktabatullah a Lughat search Engine</span>
+		<span id="hlp"><a target="_blank" title="مدد حاصل کرنے کیلئے یہاں کلک کریں|Toal words ~343700" onmouseover="document.getElementById('cnt').textContent='مدد حاصل کرنے کیلئے یہاں کلک کریں|Total words ~343700'" onmouseleave="document.getElementById('cnt').textContent='Maktabatullah a Lughat search Engine'" href="https://www.youtube.com/playlist?list=PLo3sP1OMxs0gpMhm7PHuhZvWV38xV3XwH">?</a></span>
 		</legend>
 			<span id="theitems">
             <span class="chkbb"><input style="display:none" id="dpsrch" onclick="rns2()" checked="checked" type="checkbox">مترادف الفاظ </span>
             <span class="chkbb"><input style="display:none" id="engsrch" onclick="clr();" type="checkbox">انگریزی سرچ </span>
             <span class="chkbb"><input style="display:none" id="ch" checked="" onclick="rns2()" type="checkbox">اعراب کو نظر </span>
             <span class="chkbb" style="display:none"><input style="display:none" id="od" onclick="rns2()" type="checkbox">ترتیب نظرانداز </span>
-            <span class="chkbb" style="padding-left: 14px !important;"><button id="shC" value="سرچ رزلٹ ختم" style="display:none;" onclick="localStorage.removeItem('searchT');location.reload();"><b>سرچ رزلٹ ختم </b></button><b>سرچ رزلٹ ختم </b></span>
+            <span class="chkbb" style="padding-left: 14px !important;display:none;"><button id="shC" value="سرچ رزلٹ ختم" style="display:none;" onclick="localStorage.removeItem('searchT')"><b>سرچ رزلٹ ختم </b></button><b>سرچ رزلٹ ختم </b></span>
             <div id="srch">
 				<span id="srch-info">تلاش کا دائرہ منتحب کریں</span>
 				<span class="some" data-load="quran.AM" onclick="dataC(this)">قرآن تفسیر</span>
@@ -347,7 +368,7 @@ fieldset {
 			</span>
     </fieldset>
 	<div id="theInputs" style="margin-left: 9;">
-    <input type="text" id="txtR" onclick="checka()" dir="auto" placeholder=" Filter تلاش کو فلٹر کریں" style="width: 48%; height: 48px;opacity:0.4" disabled="disabled" oninput="rns3()"/>
+    <input type="text" id="txtR" onclick="checka()" dir="auto" placeholder=" Filter تلاش شدہ رزلٹس کو فلٹر کریں" style="width: 48%; height: 48px;opacity:0.4" disabled="disabled" oninput="rns3()"/>
     <input type="text" id="txt" contextmenu="mymenu" dir="auto" autofocus placeholder=" Loading صرف کچھ سیکنڈ انتظار" style="opacity:0.7" onchange="rns2();searchTT();"/>
 	<menu type="context" id="mymenu" class="searchTTE">
   </menu>
@@ -361,7 +382,6 @@ fieldset {
 </body>
 </html>
 <script>
-inp = "";
 function theRand(){
 	var theData = ""
 	var max = 560
@@ -434,7 +454,7 @@ if(location.href.includes("Select")){
 	document.getElementById("theitems").style.padding = "7";
 }
 var Words;
-if(!localStorage.db){
+if(!localStorage.lughat){
 		var Words;
 		var stringData;
 		$.ajax({
@@ -461,17 +481,17 @@ if(!localStorage.db){
 				document.getElementById("txt").style.opacity = "1";
 				document.getElementById("div").innerHTML = "";
 				stringData = data;
-				document.title = "Maktabatullah Maktaba Jibreel Advance Search Engine with Regular expression (Regex) مکتبہ جبریل سرچ";
+				document.title = "Maktabatullah Lughat Advance Search Engine with Regular expression (Regex) لغت سرچ";
 				if(stringData.includes("--1--")){
 					Words = stringData.split("--1--")
 				}else{
 					Words = stringData.split("\n")
 				}
-				localforage.setItem("Data",stringData,function(){localStorage.db="2"})
+				localforage.setItem("Lughata",stringData,function(){localStorage.lughat="3"})
 				theRand()
 			}
 		});
-}else if(localStorage.db=="1"){
+}else if(localStorage.lughat=="2"){
 		var Words;
 		var stringData;
 		$.ajax({
@@ -498,18 +518,18 @@ if(!localStorage.db){
 				document.getElementById("txt").style.opacity = "1";
 				document.getElementById("div").innerHTML = "";
 				stringData = data;
-				document.title = "Maktabatullah Maktaba Jibreel Advance Search Engine with Regular expression (Regex) مکتبہ جبریل سرچ";
+				document.title = "Maktabatullah Lughat Advance Search Engine with Regular expression (Regex) لغت سرچ";
 				if(stringData.includes("--1--")){
 					Words = stringData.split("--1--")
 				}else{
 					Words = stringData.split("\n")
 				}
-				localforage.setItem("Data",stringData,function(){localStorage.db="2"})
+				localforage.setItem("Lughata",stringData,function(){localStorage.lughat="2"})
 				theRand()
 			}
 		});
 }else{
-			localforage.getItem('Data').then(function(value) {
+			localforage.getItem('Lughata').then(function(value) {
 			document.getElementById("txt").placeholder = " تلاش یہاں سے شروع کریں"
 			document.getElementById("txt").style.opacity = "1";
 			stringData = value;
@@ -522,13 +542,11 @@ if(!localStorage.db){
 			}).catch(function(err) {
 			});
 }
-window.onscroll = function(){
-	if(window.scrollMaxY==window.scrollY){
-	if(document.getElementById("more")!=null){
-		document.getElementById("more").click()
-		}
-	}
-}
+window.onscroll = function () {
+    if (window.scrollMaxY == window.scrollY && document.getElementById("more") != null) {
+        document.getElementById("more").click();
+    }
+};
  function excs(data){
 		var txtToR = "|"+data.textContent;
 		var lclst = localStorage.searchT;
@@ -560,7 +578,6 @@ window.onscroll = function(){
   })
 }
     function clmm() {
-		
 	try{
 		if ($("#ch:checked").length > 0) {
 		inp = inp.replace(/ؤ|و/g, "(و|ؤ)")
@@ -589,9 +606,7 @@ window.onscroll = function(){
 			Worda = filterItems(inp.split(".*")[0]);
 			Worda = [...new Set(Worda)];
 		}
-		
 		var theData = "";
-		
 		if(inp.includes("&")){
 				inpv = inp.split("&")
 				for(j=0;j<inpv.length;j++){
@@ -615,14 +630,13 @@ window.onscroll = function(){
 						break;
 					}
 				}
-				
 				if(mMatch=="true"){
 							if(aWords.includes("&des")){
 										aWords = "<span class='theQ'>"+aWords.replace(/&des/,"</span><br>");
 								}else if(aWords.includes("--2--")){
 										aWords = "<span class='theQ'>"+aWords.replace("--2--","</span><br>");
-								}else if(aWords.includes("~")){
-										aWords = "<span class='theQ'>"+aWords.replace("~","</span><br>");
+								}else if(aWords.includes("ترجمہ:")){
+										aWords = "<span class='theQ'>"+aWords.replace("ترجمہ:","</span><br>");
 								}
 							cnt += 1;
 							$("#cnt")[0].innerHTML = "Total Result: " + cnt
@@ -638,7 +652,6 @@ window.onscroll = function(){
 		}else{
 				inp = inp.split(".*");
 				var mMatch = "";
-				
 				for (i = 0; i < Worda.length; i++) {
 				aWords = Worda[i];
 				for(e=0;e<inp.length;e++){
@@ -656,16 +669,14 @@ window.onscroll = function(){
 						mMatch = "false";
 						break;
 					}
-					
 				}
-				
 				if(mMatch=="true"){
 							if(aWords.includes("&des")){
 										aWords = "<span class='theQ'>"+aWords.replace(/&des/,"</span><br>");
 								}else if(aWords.includes("--2--")){
 										aWords = "<span class='theQ'>"+aWords.replace("--2--","</span><br>");
-								}else if(aWords.includes("~")){
-										aWords = "<span class='theQ'>"+aWords.replace("~","</span><br>");
+								}else if(aWords.includes("ترجمہ:")){
+										aWords = "<span class='theQ'>"+aWords.replace("ترجمہ:","</span><br>");
 								}
 							cnt += 1;
 							$("#cnt")[0].innerHTML = "Total Result: " + cnt
@@ -684,12 +695,13 @@ window.onscroll = function(){
 		if(cnt<=0){
 			document.getElementById("cnt").textContent = "Total Result: 0";
 			document.getElementById("div").innerHTML = "";
+			console.log("some")
 			$("#div").html('<p style="text-align: center;">کوئی نتیجہ نہیں ملا</p>');
 		}else{
 			theData = theData.replace("[txtToSpan]","<span class='hidden'>").replace(/\[txtToSpan\]/g,"</span><span class='hidden'>");
 			 $("#div").html("")
 			$("#div").append(theData)
-			if(cnt<101){
+			if(cnt<301){
 			}else{
 			document.getElementById("div").innerHTML += '<div id="more" onclick="theFunc()" style="text-align: center;cursor: pointer;color: blue;text-decoration: underline;font-size: 21px;">مزید دکھایئے</div>';
 			}
@@ -805,7 +817,6 @@ window.onscroll = function(){
         inp = inp.replaceAll("؎", ".")
         inp = inp.replace(/(\S+)؛/g, "($1){0,1}")
 		inp = inp.replaceAll("؟", ".{0,2}")
-		
         if (inp.includes("&")) {
             inp = inp.replaceAll("&", "||")
         }
@@ -842,8 +853,14 @@ window.onscroll = function(){
         $("#cnt")[0].innerHTML = "Total Result: " + cnt
 
     }
-function datam(){
-	
+
+
+    function rns2() {
+        function isMatch(searchOnString, searchText) {
+            searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+            return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
+        }
+		function datam(){
 		if(inp.match(/(\S+)ٓ/)!=null){
 			if(inp.match(/ٓ/g).length>1){
 				inp = inp.split("").join("'").replaceAll("ٓ","")
@@ -857,7 +874,6 @@ function datam(){
 			inp = inp.replace(" & ","&")
 			}
 		}
-		
 		inp = inp.replace(/\|/,"&")
 		inp = inp.replace(/(\d)\۔(\d+)/g, ".{$1!$2}")
 		inp = inp.replaceAll("۔", ".{0!}")
@@ -869,27 +885,20 @@ function datam(){
 		inp = inp.replaceAll("؎", ".")
 		inp = inp.replace(/(\S+)؛/g, "($1){0!1}")
 		inp = inp.replaceAll("؟", ".{0!2}")
-		
 		if($("#engsrch:checked").length == 0){
 			inp = inp.replace(/[a-zA-Z]+/g, "")
 		}
 		inp = inp.replaceAll("  ", " ")
 		inp = inp.trim();
 		$("#txtH").val(inp);
-		
-	}
-
-    function rns2() {
-		
-        function isMatch(searchOnString, searchText) {
-            searchText = searchText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-            return searchOnString.match(new RegExp("\\b" + searchText + "\\b", "i")) != null;
-        }
-		
-
+		}
         $("#txt")[0].value = $("#txt").val().replaceAll("&amp;", "&")
         inp = $("#txt").val()
-		
+		if(inp.includes("!")){
+			inp = inp.replaceAll("!","")
+			document.getElementById("dpsrch").checked = false;
+			document.getElementById("engsrch").checked = "checked";
+		}
         if ($("#engsrch:checked").length == 0) {
             dt = "";
             $("#txtH").val(inp);
@@ -905,7 +914,6 @@ function datam(){
                     }
                 }
 				inp = inp.replace(inp, dt)
-				
                 datam()
                 rns();
         } else {
@@ -979,7 +987,6 @@ if (!String.prototype.replaceLast) {
     }
 
     function rns() {
-		
         if ($("#dpsrch:checked").length > 0) {
             $("#engsrch").prop("checked", false);
         }
@@ -1006,24 +1013,17 @@ if (!String.prototype.replaceLast) {
 						inp = a;
 				}
 		}
-		
         if (inp.includes("&")) {
             var dta = inp.split("&")
-			console.log(dta)
             var dta2 = "";
             for (i = 0; i < dta.length; i++) {
                 if (dta[i].includes("/")) {
                     dta2 += dta[i].replaceAll(/(\S+)\/(\S+)/gi, "($1|$2)") + "]]";
-					
                 } else {
-                    dta2 += dta;
-					//
+                    dta2 += dta[i] + "]]";
                 }
             }
-			dta2 = dta2.replaceAll(",","&")
-			//console.log(dta2)
             dta2 = dta2.replace("]]","]] ").split(' ').reverse().join(' ').replace(/]]/, '').split(' ').reverse().join(' ').replace("]] ","]]").replaceAll("]]", "&");
-			
             inp = dta2.replaceAll("/", "|")
 			
         } else {
@@ -1035,7 +1035,6 @@ if (!String.prototype.replaceLast) {
             inp = dta2.replaceAll("/", "|")
         }
 		inp = inp.replaceAll("\"", ".{0,}")
-		
         if (inp == "") {
             $("#div").html("");
             $("#cnt")[0].innerHTML = "Total Result: " + 0
@@ -1071,18 +1070,15 @@ if (!String.prototype.replaceLast) {
             if ($("#dpsrch:checked").length != 0) {
 					synonoms()
                     inp = inp.trim();
-					
                     clmm()
             }
             if ($("#engsrch:checked").length == 0 && $("#dpsrch:checked").length == 0) {
-                
-				clmm()
+                clmm()
             }
 
             if ($("#engsrch:checked").length != 0) {
                 //loadScript("fatawa_eng.js", function () {
                     inp = inp.trim();
-
                     clmm()
                 //});
             }
@@ -1103,7 +1099,7 @@ if (!String.prototype.replaceLast) {
 			document.getElementsByTagName("style")[0].innerHTML += "p{font-family:'inherit !important';padding-top:3px;padding-bottom:2px;}"
 		}
 		if(location.href.includes("Hadith")||location.href.includes("hadith")){
-			document.getElementsByTagName("style")[0].innerHTML += "p{font-size:19px !important;word-spacing:2px !important;}.theQ{font-family:'muhammadi quranic font, calibri !important',arial !important;font-size:21;}"
+			document.getElementsByTagName("style")[0].innerHTML += "p{font-size:19px !important;word-spacing:2px !important;}.theQ{font-family:'muhammadi quranic font',arial !important;font-size:21;}"
 			document.getElementById("dpsrch").checked = false
 		}
         document.getElementsByClassName("chkbb")[0].onclick = function () {
@@ -1122,11 +1118,20 @@ if (!String.prototype.replaceLast) {
 			document.getElementsByClassName("chkbb")[4].style.background = "rgb(13, 233, 13) none repeat scroll 0% 0%";
             document.getElementsByClassName("chkbb")[4].children[0].click();
         }
+		if(localStorage.getItem("settings")){
+			var newsa = localStorage.getItem("settings");
+			if(newsa=="false"){
+			document.querySelector("#settings > input[type=checkbox]").checked = 0;
+			thachka();
+			}else{
+				document.querySelector("#settings > input[type=checkbox]").checked = 1;
+				thachka();
+			}
+			
+		}
     }
-	
-	
-	
-	const fontUrl = "https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap";
+</script><script>
+const fontUrl = "https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap";
 
 const link = document.createElement("link");
 link.rel = "stylesheet";
@@ -1136,11 +1141,35 @@ document.head.appendChild(link);
 const style = document.createElement("style");
 style.innerHTML = `
   * {
-    font-family: 'Noto Nastaliq Urdu', 'jameel noori nastaleeq', calibri !important;
+    font-family: 'jameel noori nastaleeq', 'Noto Nastaliq Urdu', serif !important;
+  }
+  input, textarea, select, button {
+    font-family: 'jameel noori nastaleeq', 'Noto Nastaliq Urdu', serif !important;
   }
 `;
 document.head.appendChild(style);
 
 
+function thachka(){
+if(localStorage.getItem("settingsa")){
+	var stati = localStorage.getItem("settings")
+}else{
+
+}
+states = document.querySelector("#settings > input[type=checkbox]").checked
+//alert(states)
+if(states == true){
+	document.getElementsByTagName("fieldset")[0].style.display = "block";
+	localStorage.setItem("settings", true)
+		document.querySelector("#settings").style.top = "2rem";
+	document.querySelector("#settings").style.left = "6rem";
+}else{
+	document.getElementsByTagName("fieldset")[0].style.display = "none";
+	localStorage.setItem("settings", false)
+	document.querySelector("#settings").style.top = "2px";
+	document.querySelector("#settings").style.left = "0px";
+}
+
+}
 
 </script>
